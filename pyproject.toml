@@ -8,3 +8,6 @@ authors = ["Dmitry Ponyatov <dponyatov@gmail.com>"]
 python = "^3.7"
 ply = "^3.11"
 xxhash = "^1.4"
+[tool.poetry.dev-dependencies]
+autopep8 = ""
+pytest = ""
