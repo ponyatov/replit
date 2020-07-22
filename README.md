@@ -27,7 +27,7 @@ CP here is a programming model described in the works of Enn Heraldovich Tyugu a
 
 ## Base Node Class
 
-The core of the **graph interpreter system** is a homoiconic model uses a directed graph of objects as both program and data representation. The idea was taken from [1] and extended with the ability to store not only slots (attributes) but also hold any knowledge frames in an ordered container.
+The core of the **graph interpreter system** is a homoiconic model uses a directed graph of objects as both program and data representation. The idea was taken from [minsky] and extended with the ability to store not only slots (attributes) but also hold any knowledge frames in an ordered container.
 
 https://www.youtube.com/watch?v=nXJ_2uGWM-M
 
@@ -93,3 +93,14 @@ Metaprogramming -- when one program modifies (generates) another program, includ
 Metaprogramming is a method of boosting your efficiency as a programmer by expanding the language you use. If you write very similar code every day, in languages ​​that can do meta (Lisp, Nim), you can write small macro programs that will run during the compilation stage, and generate new code by a template, or modify an existing code the way as you need it. Factically, you can add to the language those features that are needed for a narrow set of your specific tasks.
 
 In order to be able to use metaprogramming in a full scale, the language or programming system you are using must be homoiconic. If you want to use this method with industrial programming languages, the use of an EDS interpreter will allow you to quickly and conveniently solve your problems, paying for it with some losses in the speed of programs and memory usage (see a comparison of interpreters vs the compilers into machine code).
+
+## Links
+
+[minsky] Marvin Minsky Frames for data representation [html](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
+
+[tyugu] Э.Х.Тыугу Концептуальное программирование. М.: Наука, 1984. 255 с
+
+[sym88] J. Symbolic Computation (1988) 5, 359-375\ The Programming System PRIZ
+\ G.Mints, E.Tyugu, Institute of Cybernetics, Estonian Academy of Sciences,Tallinn 200108, USSR \ [pdf](https://www.academia.edu/18315153/The_programming_system_PRIZ?auto=download)
+
+[priz] Инструментальная система программирования ЕС ЭВМ (ПРИЗ) / М.И. Кахро, А.П. Калья, Энн Харальдович Тыугу . – Изд. 2-е – Москва : Финансы и статистика, 1988 . – 181 с ISBN 5-279-00111-2
