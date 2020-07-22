@@ -1,7 +1,14 @@
 *~
 *.swp
 *.log
-*.pyc
 poetry.lock
 
 /tcc/
+
+*.pyc
+bin/
+include/
+lib/
+lib64
+pyvenv.cfg
+share/

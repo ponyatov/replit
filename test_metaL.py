@@ -2,13 +2,16 @@ import pytest
 
 from metaL import *
 
+
 class TestObject:
 
-  def test_empty(self):
-    assert 1==1
+    def hello(self): return Object('Hello')
+    def world(self): return Object('World')
 
-  def hello(self): return Object('Hello')
+    def test_hello(self):
+        assert self.hello().test() ==\
+            '\n<object:Hello>'
 
-  def test_hello(self):
-    assert self.hello().test ==\
-    ''
+    def test_world(self):
+        assert (self.hello() // self.world()).test() ==\
+            '\n<object:Hello>'

@@ -7,19 +7,20 @@ REL = $(shell git rev-parse --short=4 HEAD)
 
 WGET = wget -c --no-check-certificate
 
-PIP = $(shell which pip3)
-PY  = $(shell which python3)
-
+PIP = $(CWD)/bin/pip3
+PY  = $(CWD)/bin/python3
+PYT = $(CWD)/bin/pytest
+PEP = $(CWD)/bin/autopep8 --ignore=E26,E302,E401,E402
 
 OBJ = tmp/empty.o tmp/hello
 
 
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
-	autopep8 -i      $(MODULE).py
-	autopep8 -i test_$(MODULE).py
-	pytest      test_$(MODULE).py
-	$(PY)            $(MODULE).py $(MODULE).ini
+	$(PEP) -i      $(MODULE).py
+	$(PEP) -i test_$(MODULE).py
+	$(PYT)    test_$(MODULE).py
+	$(PY)          $(MODULE).py $(MODULE).ini
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
@@ -38,6 +39,16 @@ update: $(OS)_update
 Linux_install Linux_update:
 #	sudo apt update
 #	sudo apt install -u `cat apt.txt`
+
+.PHONY: venv
+venv:
+	# python3 -m venv .
+	$(PIP) install -U pip autopep8 pytest
+	$(PIP) install -U -r requirements.txt
+	$(MAKE) requirements.txt
+.PHONY: requirements.txt
+requirements.txt: $(PIP)
+	$< freeze | grep -v 0.0.0 > $@
 
 
 
