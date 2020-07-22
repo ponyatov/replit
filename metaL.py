@@ -76,3 +76,35 @@ class Object:
     def __floordiv__(self, that):
         self.nest.append(that)
         return self
+
+
+class Primitive(Object):
+    pass
+
+class Symbol(Primitive):
+    pass
+
+class String(Primitive):
+    pass
+
+class Number(Primitive):
+    def __init__(self, V):
+        Primitive.__init__(self, float(V))
+
+class Integer(Number):
+    def __init__(self, V):
+        Primitive.__init__(self, int(V))
+
+class Hex(Integer):
+    def __init__(self, V):
+        Primitive.__init__(self, int(V[2:], 0x10))
+
+    def _val(self):
+        return hex(self.val)
+
+class Bin(Integer):
+    def __init__(self, V):
+        Primitive.__init__(self, int(V[2:], 0x02))
+
+    def _val(self):
+        return bin(self.val)
