@@ -16,7 +16,10 @@ OBJ = tmp/empty.o tmp/hello
 
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
-	echo $^
+	autopep8 -i      $(MODULE).py
+	autopep8 -i test_$(MODULE).py
+	pytest      test_$(MODULE).py
+	$(PY)            $(MODULE).py $(MODULE).ini
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
