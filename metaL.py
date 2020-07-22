@@ -7,6 +7,8 @@ YEAR = 2020
 LICENSE = 'MIT'
 
 
+## base object graph node
+
 class Object:
 
     def __init__(self, V):
@@ -26,6 +28,21 @@ class Object:
     def dump(self, cycle=None, depth=0, prefix='', test=False):
         # header
         tree = self._pad(depth) + self.head(prefix, test)
+        # cycles
+        if not depth:
+            cycle = []
+        if self in cycle:
+            return tree + ' _/'
+        else:
+            cycle.append(self)
+        # slot{}s
+        for i in sorted(self.slot.keys()):
+            tree += self.slot[i].dump(cycle, depth + 1, '%s = ' % i, test)
+        # nest[]ed
+        idx = 0
+        for j in self.nest:
+            tree += j.dump(cycle, depth + 1, '%s: ' % idx, test)
+            idx += 1
         # subtree
         return tree
 
