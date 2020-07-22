@@ -5,5 +5,6 @@ version = "0.0.1"
 description = "[meta]programming [L]anguage"
 authors = ["Dmitry Ponyatov <dponyatov@gmail.com>"]
 [tool.poetry.dependencies]
+python = "^3.7"
 ply = "^3.11"
-python = "^3.8"
+xxhash = "^1.4"
