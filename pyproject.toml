@@ -1,0 +1,9 @@
+[tool]
+[tool.poetry]
+name = "metaL"
+version = "0.0.1"
+description = "[meta]programming [L]anguage"
+authors = ["Dmitry Ponyatov <dponyatov@gmail.com>"]
+[tool.poetry.dependencies]
+ply = "^3.11"
+python = "^3.8"

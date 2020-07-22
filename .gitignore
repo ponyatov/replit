@@ -1,0 +1,6 @@
+*~
+*.swp
+*.log
+*.pyc
+poetry.lock
+
