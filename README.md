@@ -170,7 +170,7 @@ interpreters vs the compilers into machine code).
 ## Links
 
 [SICP] [Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html#%_toc_start)
-       Harold Abelson, Gerald Jay Sussman, Julie Sussman
+       Harold Abelson, Gerald Jay Sussman, Julie Sussman // MIT Press, 1996, ISBN	0-262-51087-1
        
 
 [minsky] Marvin Minsky **Frames for data representation**
