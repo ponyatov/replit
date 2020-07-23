@@ -173,10 +173,11 @@ interpreters vs the compilers into machine code).
        Harold Abelson, Gerald Jay Sussman, Julie Sussman // MIT Press, 1996, ISBN	0-262-51087-1
        
 
-[minsky] Marvin Minsky **Frames for data representation**
-         [html](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
+[minsky] Marvin Minsky [Frames for data representation](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
 
-[tyugu] Э.Х.Тыугу **Концептуальное программирование**. М.: Наука, 1984. 255 с
+[tyugu] **Knowledge-Based Programming** Enn Tyugu 1988 // Addison-Wesley Longman Publishing Co., Inc.
+
+[tyuguru] Э.Х.Тыугу **Концептуальное программирование**. М.: Наука, 1984. 255 с
 
 [sym88] J. Symbolic Computation (1988) 5, 359-375\ **The Programming System PRIZ**
 \ G.Mints, E.Tyugu, Institute of Cybernetics, Estonian Academy of
