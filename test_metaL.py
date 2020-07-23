@@ -1,8 +1,15 @@
+## @file
+## @brief `metaL` core test bundle
+
+## @defgroup test tests
+
 import pytest
 
 from metaL import *
 
 
+## @brief @class Object
+## @ingroup Tests
 class TestObject:
 
     def hello(self): return Object('Hello')
@@ -29,6 +36,7 @@ class TestObject:
             '\n\t0: <object:World>'
 
 
+## @ingroup tests
 class TestPrimitive:
 
     def test_number(self):
@@ -54,6 +62,7 @@ class TestPrimitive:
         assert x.val == 13
 
 
+## @ingroup tests
 class TestLexer:
 
     def test_none(self):

@@ -77,3 +77,9 @@ $(TMP)/$(TCC)/README: $(TMP)/$(TCC_GZ)
 
 $(TMP)/$(TCC_GZ):
 	$(WGET) -O $@ http://download.savannah.gnu.org/releases/tinycc/$(TCC_GZ)
+
+
+
+.PHONY: doxy
+doxy:
+	doxygen doxy.gen 1>/dev/null
