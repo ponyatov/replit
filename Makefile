@@ -24,7 +24,7 @@ test:
 	$(MAKE) pep
 	$(PYT)  test_$(MODULE).py
 .PHONY: pep
-pep:	
+pep:
 	$(PEP) -i      $(MODULE).py
 	$(PEP) -i test_$(MODULE).py
 
@@ -43,8 +43,8 @@ update: $(OS)_update
 
 .PHONY: Linux_install Linux_update
 Linux_install Linux_update:
-#	sudo apt update
-#	sudo apt install -u `cat apt.txt`
+	echo sudo apt update
+	echo sudo apt install -u `cat apt.txt`
 
 .PHONY: venv
 venv:
