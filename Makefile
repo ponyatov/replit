@@ -18,7 +18,7 @@ OBJ = tmp/empty.o tmp/hello
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
 	$(MAKE) pep
-	$(PY)   $(MODULE).py $(MODULE).ini
+	$(PY)   -i $(MODULE).py $(MODULE).ini
 .PHONY: test
 test:
 	$(MAKE) pep

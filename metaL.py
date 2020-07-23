@@ -81,32 +81,66 @@ class Object:
 
     ## @}
 
-    ## operator
+    ## @name operator
+    ## @{
 
+    ## `A[key] ~> A.slot[key:str] | A.nest[key:int] `
     def __getitem__(self, key):
-        return self.nest[key]
+        if isinstance(key, int):
+            return self.nest[key]
+        elif isinstance(key, str):
+            return self.slot[key]
+        else:
+            raise TypeError(that)
 
+    ## `A[key] = B`
     def __setitem__(self, key, that):
         self.slot[key] = that
         return self
 
+    ## `A << B ~> A[B.type] = B`
     def __lshift__(self, that):
         return self.__setitem__(that._type(), that)
 
+    ## `A >> B ~> A[B.val] = B`
     def __rshift__(self, that):
         return self.__setitem__(that.val, that)
 
+    ## `A // B -> A.push(B)`
     def __floordiv__(self, that):
         self.nest.append(that)
         return self
 
+    ## @}
+
+    ## @name evaluation
+    ## @{
+
+    ## evaluate in context
+    ## @param[in] ctx context
+    def eval(self, ctx): raise Error((self))
+
+    ## @}
+
+## @defgroup error Error
+## @ingroup object
+
+## @ingroup error
+class Error(Object, BaseException):
+    pass
+
+## @ingroup error
+## undefined variable (forward assignment)
+class Undef(Object):
+    pass
 
 ## @defgroup prim Primitive
 ## @ingroup object
 
 ## @ingroup prim
 class Primitive(Object):
-    pass
+    ## primitives evaluates to itself
+    def eval(self, ctx): return self
 
 ## @ingroup prim
 class Symbol(Primitive):
@@ -121,6 +155,14 @@ class String(Primitive):
 class Number(Primitive):
     def __init__(self, V):
         Primitive.__init__(self, float(V))
+
+    ## `-A`
+    def minus(self, ctx):
+        return self.__class__(-self.val)
+
+    ## `+A`
+    def plus(self, ctx):
+        return self.__class__(+self.val)
 
 ## @ingroup prim
 class Integer(Number):
@@ -180,7 +222,17 @@ class Active(Object):
 ## @ingroup active
 ## operator
 class Op(Active):
-    pass
+    def eval(self, ctx):
+        # greedy computation for all subtrees
+        greedy = list(map(lambda i: i.eval(ctx), self.nest))
+        # unary
+        if len(greedy) == 1:
+            if self.val == '+':
+                return greedy[0].plus(ctx)
+            if self.val == '-':
+                return greedy[0].minus(ctx)
+        # unknown
+        raise Error((self))
 
 ## @ingroup active
 ## Virtual Machine (environment + stack + message queue)
@@ -193,9 +245,28 @@ class VM(Active):
 vm = VM(MODULE)
 
 
+## @defgroup game Game
+## @brief `pygame` interface
+
+import pygame
+pygame.init()
+
+## @ingroup game
+class Game(Object):
+    pass
+
+## @ingroup game
+class Display(Game):
+    def __init__(self, W=320, H=240):
+        Game.__init__(self, '%sx%s' % (W, H))
+        self.display = pygame.display.set_mode((W, H))
+
+
+vm['game'] = Game(MODULE)
+
+
 ## @defgroup lexer lexer
 ## @ingroup parser
-
 import ply.lex as lex
 
 ## @ingroup lexer
@@ -320,7 +391,12 @@ import ply.yacc as yacc
 ## @ingroup parser
 ## Abstract Syntax Tree =~= any `metaL` graph
 class AST(Object):
-    pass
+    ## AST evaluates to new AST with each subelement evaluated
+    def eval(self, ctx):
+        res = AST(self.val)
+        for i in self.nest:
+            res // i.eval(ctx)
+        return res
 
 ## @ingroup parser
 ##    ' REPL : '
@@ -410,8 +486,10 @@ parser = yacc.yacc(debug=False, write_tables=False)
 def init():
     for init in sys.argv[1:]:
         with open(init) as src:
-            ast = parser.parse(src.read())
-            print(ast)
+            for ast in parser.parse(src.read()):
+                print(ast)
+                print(ast.eval(vm))
+                print('-' * 66)
 
 
 if __name__ == '__main__':
