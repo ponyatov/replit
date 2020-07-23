@@ -7,6 +7,8 @@ YEAR = 2020
 LICENSE = 'MIT'
 
 
+import os, sys
+
 ## base object graph node
 
 class Object:
@@ -108,3 +110,65 @@ class Bin(Integer):
 
     def _val(self):
         return bin(self.val)
+
+
+class Container(Object):
+    pass
+
+class Vector(Container):
+    pass
+class Stack(Container):
+    pass
+class Dict(Container):
+    pass
+
+
+## lexer
+
+import ply.lex as lex
+
+tokens = ['symbol']
+
+t_ignore = ' \t\r\n'
+t_ignore_comment = r'\#.*'
+
+def t_symbol(t):
+    r'[^ \t\r\n\#]+'
+    t.value = Symbol(t.value)
+    return t
+
+def t_ANY_error(t): raise SyntaxError(t)
+
+
+lexer = lex.lex()
+
+
+# parser
+
+import ply.yacc as yacc
+
+class AST(Vector):
+    pass
+
+def p_REPL_none(p):
+    ' REPL : '
+    p[0] = AST('')
+def p_REPL_recursion(p):
+    ' REPL : REPL ex '
+    p[0] = p[1] // p[2]
+
+def p_ex_symbol(p):
+    ' ex : symbol '
+    p[0] = p[1]
+
+def p_error(p): raise SyntaxError(p)
+
+
+parser = yacc.yacc(debug=False, write_tables=False)
+
+
+## system init
+if __name__ == '__main__':
+    for init in sys.argv[1:]:
+        with open(init) as src:
+            print(parser.parse(src.read()))

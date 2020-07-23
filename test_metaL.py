@@ -52,3 +52,31 @@ class TestPrimitive:
         x = Bin('0b1101')
         assert x.test() == '\n<bin:0b1101>'
         assert x.val == 13
+
+
+class TestLexer:
+
+    def test_none(self):
+        lexer.input('')
+        assert lexer.token() == None
+
+    def test_comment(self):
+        lexer.input('# comment')
+        assert lexer.token() == None
+
+    def test_spaces(self):
+        lexer.input(' \t\r\n')
+        assert lexer.token() == None
+
+    def test_symbol(self):
+        lexer.input('symbol')
+        token = lexer.token()
+        assert token and token.value.test() ==\
+            '\n<symbol:symbol>'
+
+
+class TestParser:
+
+    def test_none(self):
+        assert parser.parse('').test() ==\
+            '\n<ast:>'

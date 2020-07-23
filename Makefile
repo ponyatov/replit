@@ -42,7 +42,7 @@ Linux_install Linux_update:
 
 .PHONY: venv
 venv:
-	# python3 -m venv .
+	python3 -m venv .
 	$(PIP) install -U pip autopep8 pytest
 	$(PIP) install -U -r requirements.txt
 	$(MAKE) requirements.txt
