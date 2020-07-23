@@ -17,13 +17,16 @@ OBJ = tmp/empty.o tmp/hello
 
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
-	$(PEP) -i      $(MODULE).py
-	$(PEP) -i test_$(MODULE).py
-	$(MAKE)        test
-	$(PY)          $(MODULE).py $(MODULE).ini
+	$(MAKE) pep
+	$(PY)   $(MODULE).py $(MODULE).ini
 .PHONY: test
 test:
-	$(PYT)    test_$(MODULE).py
+	$(MAKE) pep
+	$(PYT)  test_$(MODULE).py
+.PHONY: pep
+pep:	
+	$(PEP) -i      $(MODULE).py
+	$(PEP) -i test_$(MODULE).py
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
