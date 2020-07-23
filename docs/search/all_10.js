@@ -36,5 +36,7 @@ var searchData=
   ['testparser',['TestParser',['../classtest__metaL_1_1TestParser.html',1,'test_metaL']]],
   ['testprimitive',['TestPrimitive',['../classtest__metaL_1_1TestPrimitive.html',1,'test_metaL']]],
   ['title',['TITLE',['../namespacemetaL.html#adb1975517130abcb612bb78b3846b260',1,'metaL']]],
-  ['tokens',['tokens',['../group__lexer.html#ga8383b5e06f5dd4e0811107934bb747bf',1,'metaL']]]
+  ['tokens',['tokens',['../group__lexer.html#ga8383b5e06f5dd4e0811107934bb747bf',1,'metaL']]],
+  ['tutorial',['Tutorial',['../tutorial.html',1,'']]],
+  ['tutorial_2emd',['tutorial.md',['../tutorial_8md.html',1,'']]]
 ];
