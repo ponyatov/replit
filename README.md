@@ -169,16 +169,20 @@ interpreters vs the compilers into machine code).
 
 ## Links
 
-[minsky] Marvin Minsky Frames for data representation
+[SICP] [Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html#%_toc_start)
+       Harold Abelson, Gerald Jay Sussman, Julie Sussman
+       
+
+[minsky] Marvin Minsky **Frames for data representation**
          [html](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
 
-[tyugu] Э.Х.Тыугу Концептуальное программирование. М.: Наука, 1984. 255 с
+[tyugu] Э.Х.Тыугу **Концептуальное программирование**. М.: Наука, 1984. 255 с
 
-[sym88] J. Symbolic Computation (1988) 5, 359-375\ The Programming System PRIZ
+[sym88] J. Symbolic Computation (1988) 5, 359-375\ **The Programming System PRIZ**
 \ G.Mints, E.Tyugu, Institute of Cybernetics, Estonian Academy of
 Sciences,Tallinn 200108, USSR \
 [pdf](https://www.academia.edu/18315153/The_programming_system_PRIZ?auto=download)
 
-[priz] Инструментальная система программирования ЕС ЭВМ (ПРИЗ) / М.И. Кахро,
+[priz] **Инструментальная система программирования ЕС ЭВМ (ПРИЗ)** / М.И. Кахро,
 А.П. Калья, Энн Харальдович Тыугу . – Изд. 2-е – Москва : Финансы и статистика,
 1988 . – 181 с ISBN 5-279-00111-2
