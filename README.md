@@ -3,6 +3,8 @@
 
 https://repl.it/@DmitryPonyatov/replit
 
+doxygen manual: https://ponyatov.github.io/replit/modules.html
+
 * https://blog.repl.it/langjam
 * https://repl.it/talk/share/metaL-for-replit-Language-Jam-contest/46470
 
