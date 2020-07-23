@@ -257,12 +257,19 @@ class Game(Object):
 
 ## @ingroup game
 class Display(Game):
-    def __init__(self, W=320, H=240):
-        Game.__init__(self, '%sx%s' % (W, H))
+    ## @param[in] W width in pixels
+    ## @param[in] H height in pixels
+    def __init__(self, V, W=320, H=240):
+        Game.__init__(self, V)
+        self['W'] = Integer(W)
+        self['H'] = Integer(H)
+
+    def eval(self, ctx):
         self.display = pygame.display.set_mode((W, H))
+        return self
 
 
-vm['game'] = Game(MODULE)
+vm['game'] = Game(MODULE) << Display(MODULE)
 
 
 ## @defgroup lexer lexer
@@ -494,3 +501,4 @@ def init():
 
 if __name__ == '__main__':
     init()
+    print(vm)
