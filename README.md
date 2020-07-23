@@ -19,8 +19,10 @@ github: https://github.com/ponyatov/replit
 * integrate best features from Python, Lisp/Clojure, and Smalltalk
 * targets on IoT programming:
   * ANSI C code generation is required by design
+    * uses [TCC](https://bellard.org/tcc/) host compiler backend for fast debug
   * cross-compiling to many embedded devices including
     AVR8, Cortex-M, and MSP430 microcontrollers
+    * uses GCC cross-compiler for portability
 
 ### Concept Programming
 
