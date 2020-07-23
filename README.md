@@ -1,4 +1,4 @@
-#  `metaL`
+#  ![logo](doc/hedge64x64.png) `metaL`
 ## version for Repl.it Language Jam contest
 
 https://repl.it/@DmitryPonyatov/replit
