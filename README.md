@@ -17,6 +17,10 @@ github: https://github.com/ponyatov/replit
 * protect people from the parens soup by using infix syntax
   and AST-friendly data structure in place of classic lists
 * integrate best features from Python, Lisp/Clojure, and Smalltalk
+* targets on IoT programming:
+  * ANSI C code generation is required by design
+  * cross-compiling to many embedded devices including
+    AVR8, Cortex-M, and MSP430 microcontrollers
 
 ### Concept Programming
 
