@@ -19,8 +19,11 @@ OBJ = tmp/empty.o tmp/hello
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
 	$(PEP) -i      $(MODULE).py
 	$(PEP) -i test_$(MODULE).py
-	$(PYT)    test_$(MODULE).py
+	$(MAKE)        test
 	$(PY)          $(MODULE).py $(MODULE).ini
+.PHONY: test
+test:
+	$(PYT)    test_$(MODULE).py
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
