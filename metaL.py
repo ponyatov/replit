@@ -169,6 +169,30 @@ class Dict(Container):
     pass
 
 
+## @defgroup active Active
+## @ingroup object
+
+## @ingroup active
+## executable data elements
+class Active(Object):
+    pass
+
+## @ingroup active
+## operator
+class Op(Active):
+    pass
+
+## @ingroup active
+## Virtual Machine (environment + stack + message queue)
+class VM(Active):
+    pass
+
+
+## @ingroup active
+## global system VM
+vm = VM(MODULE)
+
+
 ## @defgroup lexer lexer
 ## @ingroup parser
 
@@ -176,7 +200,9 @@ import ply.lex as lex
 
 ## @ingroup lexer
 ## token types
-tokens = ['symbol']
+tokens = ['symbol',
+          'number', 'integer', 'hex', 'bin',
+          'add', 'sub', 'mul', 'div', 'pow']
 
 ## @ingroup lexer
 ## drop spaces
@@ -192,12 +218,86 @@ def t_nl(t):
     r'\n'
     t.lexer.lineno += 1
 
+## @name operator
+## @{
+
+## @ingroup lexer
+##    r'\+'
+def t_add(t):
+    r'\+'
+    t.value = Op(t.value)
+    return t
+## @ingroup lexer
+##    r'\-'
+def t_sub(t):
+    r'\-'
+    t.value = Op(t.value)
+    return t
+## @ingroup lexer
+##    r'\*'
+def t_mul(t):
+    r'\*'
+    t.value = Op(t.value)
+    return t
+## @ingroup lexer
+##    r'\/'
+def t_div(t):
+    r'\/'
+    t.value = Op(t.value)
+    return t
+## @ingroup lexer
+##    r'\^'
+def t_pow(t):
+    r'\^'
+    t.value = Op(t.value)
+    return t
+
+## @}
+
 ## @name lexeme
 ## @{
 
 ## @ingroup lexer
+##    r`[0-9]+\.[0-9]*([eE][+\-]?[0-9]+)?`
+def t_number(t):
+    r'[0-9]+\.[0-9]*([eE][+\-]?[0-9]+)?'
+    t.value = Number(t.value)
+    t.type = 'number'
+    return t
+
+## @ingroup lexer
+##    r`[0-9]+[eE][+\-]?[0-9]+`
+def t_number_exp(t):
+    r'[0-9]+[eE][+\-]?[0-9]+'
+    t.value = Number(t.value)
+    t.type = 'number'
+    return t
+
+## @ingroup lexer
+##    r`0x[0-9a-fA-F]+`
+def t_hex(t):
+    r'0x[0-9a-fA-F]+'
+    t.value = Hex(t.value)
+    return t
+
+## @ingroup lexer
+##    r`0b[01]+`
+def t_bin(t):
+    r'0b[01]+'
+    t.value = Bin(t.value)
+    return t
+
+## @ingroup lexer
+##    r`[0-9]+`
+def t_integer(t):
+    r'[0-9]+'
+    t.value = Integer(t.value)
+    return t
+
+## @ingroup lexer
+##    r`[^ \t\r\n\#\+\-\*\/\^]+`
 def t_symbol(t):
-    r'[^ \t\r\n\#]+'
+    r'[^ \t\r\n\#\+\-\*\/\^]+'
     t.value = Symbol(t.value)
     return t
 
@@ -236,6 +336,56 @@ def p_REPL_recursion(p):
     ' REPL : REPL ex '
     p[0] = p[1] // p[2]
 
+## @name operator
+## @{
+
+
+## @ingroup parser
+precedence = (
+    ('left', 'add', 'sub'),
+    ('left', 'mul', 'div'),
+    ('left', 'pow', ),
+    ('left', 'pfx', ),
+)
+
+## @ingroup parser
+##    ' ex : add ex %prec pfx ' `+A`
+def p_ex_plus(p):
+    ' ex : add ex %prec pfx '
+    p[0] = p[1] // p[2]
+## @ingroup parser
+##    ' ex : sub ex %prec pfx ' `-A`
+def p_ex_minus(p):
+    ' ex : sub ex %prec pfx '
+    p[0] = p[1] // p[2]
+
+## @}
+
+## @name number
+## @{
+
+## @ingroup parser
+##    r' ex : number '
+def p_ex_number(p):
+    r' ex : number '
+    p[0] = p[1]
+## @ingroup parser
+##    r' ex : integer '
+def p_ex_integer(p):
+    r' ex : integer '
+    p[0] = p[1]
+## @ingroup parser
+##    r' ex : hex '
+def p_ex_hex(p):
+    r' ex : hex '
+    p[0] = p[1]
+## @ingroup parser
+##    r' ex : bin '
+def p_ex_bin(p):
+    r' ex : bin '
+    p[0] = p[1]
+
+## @}
 
 ## @ingroup parser
 ##    ' ex : symbol '
@@ -260,7 +410,8 @@ parser = yacc.yacc(debug=False, write_tables=False)
 def init():
     for init in sys.argv[1:]:
         with open(init) as src:
-            print(parser.parse(src.read()))
+            ast = parser.parse(src.read())
+            print(ast)
 
 
 if __name__ == '__main__':

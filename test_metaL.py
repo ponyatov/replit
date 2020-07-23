@@ -8,8 +8,8 @@ import pytest
 from metaL import *
 
 
-## @brief @class Object
-## @ingroup Tests
+## @ref object
+## @ingroup test
 class TestObject:
 
     def hello(self): return Object('Hello')
@@ -36,7 +36,8 @@ class TestObject:
             '\n\t0: <object:World>'
 
 
-## @ingroup tests
+## @ref prim
+## @ingroup test
 class TestPrimitive:
 
     def test_number(self):
@@ -61,8 +62,8 @@ class TestPrimitive:
         assert x.test() == '\n<bin:0b1101>'
         assert x.val == 13
 
-
-## @ingroup tests
+## @ref lexer
+## @ingroup test
 class TestLexer:
 
     def test_none(self):
@@ -83,9 +84,23 @@ class TestLexer:
         assert token and token.value.test() ==\
             '\n<symbol:symbol>'
 
-
+## @ref parser
+## @ingroup test
 class TestParser:
 
     def test_none(self):
         assert parser.parse('').test() ==\
             '\n<ast:>'
+
+    def test_numbers(self):
+        assert parser.parse('''
+            # numbers
+            -01 +02.30 -4e+5 +6.7e-8 0xDeadBeef 0b1101
+            ''').test() ==\
+            '\n<ast:>' +\
+            '\n\t0: <op:->\n\t\t0: <integer:1>' +\
+            '\n\t1: <op:+>\n\t\t0: <number:2.3>' +\
+            '\n\t2: <op:->\n\t\t0: <number:400000.0>' +\
+            '\n\t3: <op:+>\n\t\t0: <number:6.7e-08>' +\
+            '\n\t4: <hex:0xdeadbeef>' +\
+            '\n\t5: <bin:0b1101>'
