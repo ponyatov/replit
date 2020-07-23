@@ -86,3 +86,24 @@ $(TMP)/$(TCC_GZ):
 .PHONY: doxy
 doxy:
 	doxygen doxy.gen 1>/dev/null
+
+
+
+.PHONY: master shadow release
+
+MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
+MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
+
+master:
+	git checkout $@
+	git pull -v
+	git checkout shadow -- $(MERGE)
+
+shadow:
+	git checkout $@
+	git pull -v
+
+release:
+	git tag $(NOW)-$(REL)
+	git push -v && git push -v --tags
+	$(MAKE) shadow
