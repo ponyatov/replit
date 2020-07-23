@@ -257,6 +257,7 @@ class Game(Object):
 
 ## @ingroup game
 class Display(Game):
+
     ## @param[in] W width in pixels
     ## @param[in] H height in pixels
     def __init__(self, V, W=320, H=240):
@@ -264,7 +265,10 @@ class Display(Game):
         self['W'] = Integer(W)
         self['H'] = Integer(H)
 
+    ## show game window on execution
     def eval(self, ctx):
+        W = self['W'].val
+        H = self['H'].val
         self.display = pygame.display.set_mode((W, H))
         return self
 
