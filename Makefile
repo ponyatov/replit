@@ -42,16 +42,16 @@ tmp/%: src/%.c
 
 
 .PHONY: install update
+
 install: $(PIP) backend
 	-$(MAKE) $(OS)_install
-	$(PIP) install    -r requirements.txt
-	$(MAKE) requirements.txt
+	$(PIP)   install    -r requirements.txt
 #	poetry install
-update:
+update: $(PIP)
 	-$(MAKE) $(OS)_update
-	$(PIP) install -U    pip
-	$(PIP) install -U -r requirements.txt
-	$(MAKE) requirements.txt
+	$(PIP)   install -U    pip
+	$(PIP)   install -U -r requirements.txt
+	$(MAKE)  requirements.txt
 #	poetry update
 
 $(PIP) $(PY):
