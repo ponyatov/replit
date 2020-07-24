@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['system_20init',['system init',['../group__init.html',1,'']]]
+  ['parser',['parser',['../group__parser.html',1,'']]],
+  ['primitive',['Primitive',['../group__prim.html',1,'']]]
 ];

@@ -97,6 +97,8 @@ class Object:
 
     ## `A[key] = B`
     def __setitem__(self, key, that):
+        if isinstance(that, str):
+            that = String(that)
         self.slot[key] = that
         return self
 
@@ -110,6 +112,8 @@ class Object:
 
     ## `A // B -> A.push(B)`
     def __floordiv__(self, that):
+        if isinstance(that, str):
+            that = String(that)
         self.nest.append(that)
         return self
 
@@ -155,7 +159,7 @@ class Symbol(Primitive):
 
 ## @ingroup prim
 class String(Primitive):
-    pass
+    def html(self, ctx): return self.val
 
 ## @ingroup prim
 ## floating point
@@ -263,7 +267,7 @@ class Meta(Object):
 ## @ingroup meta
 class Module(Meta):
     ## @name html
-    def html(self, ctx): return '<b>%s</b>' % self.val
+    def html(self, ctx): return '<pre>%s</pre>' % self.val
 
 
 vm['MODULE'] = Module(MODULE)

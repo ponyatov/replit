@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error',['Error',['../group__error.html',1,'']]]
+  ['documenting',['Documenting',['../group__doc.html',1,'']]]
 ];

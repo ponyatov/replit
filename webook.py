@@ -123,6 +123,11 @@ web['font'] = Font('monospace') << Size('5mm')
 doc = Doc(vm)
 vm << doc
 
-doc << Title(MODULE)
+vm['TITLE'] = Title(TITLE)
+doc << vm['TITLE']
+
+vm['ABOUT'] = ABOUT
+
+doc // vm['MODULE'] // vm['TITLE'] // vm['ABOUT']
 
 web.eval(vm)

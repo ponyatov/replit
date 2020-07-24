@@ -1,4 +1,9 @@
 <map id="metaL.IO" name="metaL.IO">
-<area shape="rect" id="node3" href="$classmetaL_1_1File.html" title="metaL.File" alt="" coords="14,155,97,181"/>
-<area shape="rect" id="node2" href="$classmetaL_1_1Object.html" title="base object graph node " alt="" coords="5,5,105,32"/>
+<area shape="rect" id="node3" href="$classmetaL_1_1File.html" title="metaL.File" alt="" coords="71,155,154,181"/>
+<area shape="rect" id="node5" href="$classwebook_1_1Net.html" title="networking object " alt="" coords="180,155,272,181"/>
+<area shape="rect" id="node2" href="$classmetaL_1_1Object.html" title="base object graph node " alt="" coords="119,5,219,32"/>
+<area shape="rect" id="node4" href="$classwebook_1_1PNG.html" title="webook.PNG" alt="" coords="5,229,105,256"/>
+<area shape="rect" id="node6" href="$classwebook_1_1Ip.html" title="TCP/IP address. " alt="" coords="129,229,211,256"/>
+<area shape="rect" id="node7" href="$classwebook_1_1Port.html" title="TCP/IP port. " alt="" coords="236,229,331,256"/>
+<area shape="rect" id="node8" href="$classwebook_1_1Web.html" title="webook.Web" alt="" coords="355,229,454,256"/>
 </map>
