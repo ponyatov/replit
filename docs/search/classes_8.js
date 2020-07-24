@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['number',['Number',['../classmetaL_1_1Number.html',1,'metaL']]]
+  ['integer',['Integer',['../classmetaL_1_1Integer.html',1,'metaL']]],
+  ['io',['IO',['../classmetaL_1_1IO.html',1,'metaL']]]
 ];
