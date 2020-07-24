@@ -12,8 +12,10 @@ PY  = $(CWD)/bin/python3
 PYT = $(CWD)/bin/pytest
 PEP = $(CWD)/bin/autopep8 --ignore=E26,E302,E401,E402
 
+
 OBJ = tmp/empty.o tmp/hello
 
+SRC = $(shell find $(CWD) -maxdepth 1 -type f -regex .+.py$$)
 
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
@@ -27,12 +29,11 @@ test:
 
 .PHONY: pep
 pep:
-	$(PEP) -i      $(MODULE).py
-	$(PEP) -i test_$(MODULE).py
+	echo $(SRC) | xargs -n1 -P0 $(PEP) -i
 
 .PHONY: web
 web: $(PY) webook.py
-	$^
+	$^ $(SRC)
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
@@ -43,7 +44,7 @@ tmp/%: src/%.c
 
 .PHONY: install update
 
-install: $(PIP) backend
+install: $(PIP) backend js
 	-$(MAKE) $(OS)_install
 	$(PIP)   install    -r requirements.txt
 #	poetry install
@@ -76,6 +77,20 @@ venv:
 .PHONY: requirements.txt
 requirements.txt: $(PIP)
 	$< freeze | grep -v 0.0.0 > $@
+
+.PHONY: js
+js: static/jquery.js static/bootstrap.css static/bootstrap.js
+
+JQUERY_VER = 3.5.1
+static/jquery.js:
+	$(WGET) -O $@ https://code.jquery.com/jquery-$(JQUERY_VER).min.js
+
+BOOTSTRAP_VER = 3.4.1
+BOOTSTRAP_URL = https://stackpath.bootstrapcdn.com/bootstrap/$(BOOTSTRAP_VER)/
+static/bootstrap.css:
+	$(WGET) -O $@ https://bootswatch.com/3/darkly/bootstrap.min.css
+static/bootstrap.js:
+	$(WGET) -O $@ $(BOOTSTRAP_URL)/js/bootstrap.min.js
 
 
 
@@ -112,7 +127,7 @@ doxy:
 
 .PHONY: master shadow release
 
-MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
+MERGE  = Makefile README.md .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
 MERGE += webook.py static templates
 
@@ -120,6 +135,7 @@ master:
 	git checkout $@
 	git pull -v
 	git checkout shadow -- $(MERGE)
+	$(MAKE) doxy
 
 shadow:
 	git checkout $@

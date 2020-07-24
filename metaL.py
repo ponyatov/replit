@@ -247,15 +247,28 @@ class VM(Active):
 vm = VM(MODULE)
 
 
+## @defgroup io IO
+## @brief base file output
+
+## @ingroup io
+class IO(Object):
+    pass
+
+## @ingroup io
+class File(IO):
+    pass
+
 ## @defgroup game Game
 ## @brief `pygame` interface
 
+
 import pygame
-pygame.init()
 
 ## @ingroup game
 class Game(Object):
-    pass
+    def __init__(self, V):
+        Object.__init__(self, V)
+        pygame.init()
 
 ## @ingroup game
 class Display(Game):
