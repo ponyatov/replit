@@ -19,14 +19,20 @@ OBJ = tmp/empty.o tmp/hello
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
 	$(MAKE) pep
 	$(PY)   -i $(MODULE).py $(MODULE).ini
+
 .PHONY: test
 test:
 	$(MAKE) pep
 	$(PYT)  test_$(MODULE).py
+
 .PHONY: pep
 pep:
 	$(PEP) -i      $(MODULE).py
 	$(PEP) -i test_$(MODULE).py
+
+.PHONY: web
+web: $(PY) webook.py
+	$^
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
@@ -37,8 +43,13 @@ tmp/%: src/%.c
 
 .PHONY: install update
 install: $(OS)_install backend
+	echo $(PIP) install    -r requirements.txt
+	echo $(MAKE) requirements.txt
 	poetry install
 update: $(OS)_update
+	echo $(PIP) install -U    pip
+	echo $(PIP) install -U -r requirements.txt
+	echo $(MAKE) requirements.txt
 	poetry update
 
 .PHONY: Linux_install Linux_update
@@ -93,6 +104,7 @@ doxy:
 
 MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
+MERGE += webook.py static templates
 
 master:
 	git checkout $@
