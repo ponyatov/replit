@@ -1,0 +1,7 @@
+{% extends 'all.html' %}
+
+{% block body %}
+{% autoescape off %}
+{{ctx.html(vm)}}
+{% endautoescape %}
+{% endblock %}

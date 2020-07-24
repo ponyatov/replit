@@ -124,6 +124,11 @@ class Object:
 
     ## @}
 
+    ## @name html
+    ## @{
+    def html(self, ctx): return '<pre id=dump>%s</pre>' % self.dump()
+    ## @}
+
 ## @defgroup error Error
 ## @ingroup object
 
@@ -245,6 +250,23 @@ class VM(Active):
 ## @ingroup active
 ## global system VM
 vm = VM(MODULE)
+vm << vm
+
+
+## @defgroup meta Meta
+## @ingroup object
+
+## @ingroup meta
+class Meta(Object):
+    pass
+
+## @ingroup meta
+class Module(Meta):
+    ## @name html
+    def html(self, ctx): return '<b>%s</b>' % self.val
+
+
+vm['MODULE'] = Module(MODULE)
 
 
 ## @defgroup io IO
