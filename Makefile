@@ -28,7 +28,7 @@ test:
 	$(PYT)  test_$(MODULE).py
 
 .PHONY: pep
-pep: $(PEP)
+pep:
 	echo $(SRC) | xargs -n1 -P0 $(PEP) -i
 
 .PHONY: web
