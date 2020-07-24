@@ -42,20 +42,30 @@ tmp/%: src/%.c
 
 
 .PHONY: install update
-install: $(OS)_install backend
-	echo $(PIP) install    -r requirements.txt
-	echo $(MAKE) requirements.txt
-	poetry install
-update: $(OS)_update
-	echo $(PIP) install -U    pip
-	echo $(PIP) install -U -r requirements.txt
-	echo $(MAKE) requirements.txt
-	poetry update
+install: $(PIP) backend
+	-$(MAKE) $(OS)_install
+	$(PIP) install    -r requirements.txt
+	$(MAKE) requirements.txt
+#	poetry install
+update:
+	-$(MAKE) $(OS)_update
+	$(PIP) install -U    pip
+	$(PIP) install -U -r requirements.txt
+	$(MAKE) requirements.txt
+#	poetry update
+
+$(PIP) $(PY):
+	python3 -m venv .
+	$(PIP) install -U pip pylint autopep8
+	$(MAKE) requirements.txt
+$(PYT):
+	$(PIP) install -U pytest
+	$(MAKE) requirements.txt
 
 .PHONY: Linux_install Linux_update
 Linux_install Linux_update:
-	echo sudo apt update
-	echo sudo apt install -u `cat apt.txt`
+	sudo apt update
+	sudo apt install -u `cat apt.txt`
 
 .PHONY: venv
 venv:
