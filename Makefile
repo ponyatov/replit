@@ -28,7 +28,7 @@ test:
 	$(PYT)  test_$(MODULE).py
 
 .PHONY: pep
-pep:
+pep: $(PEP)
 	echo $(SRC) | xargs -n1 -P0 $(PEP) -i
 
 .PHONY: web
@@ -55,7 +55,7 @@ update: $(PIP)
 	$(MAKE)  requirements.txt
 #	poetry update
 
-$(PIP) $(PY):
+$(PIP) $(PY) $(PEP):
 	python3 -m venv .
 	$(PIP) install -U pip pylint autopep8
 	$(MAKE) requirements.txt
