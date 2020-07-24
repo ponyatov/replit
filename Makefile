@@ -93,6 +93,7 @@ doxy:
 
 MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
+MERGE += webook.py static templates
 
 master:
 	git checkout $@

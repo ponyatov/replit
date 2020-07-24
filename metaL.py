@@ -21,6 +21,8 @@ class Object:
     ## construct object
     ## @param[in] V given scalar value
     def __init__(self, V):
+        if isinstance(V, Object):
+            V = V.val
         ## name / scalar value
         self.val = V
         ## attributes = dict = env
