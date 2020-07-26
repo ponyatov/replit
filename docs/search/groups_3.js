@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['game',['Game',['../group__game.html',1,'']]]
+  ['error',['Error',['../group__error.html',1,'']]]
 ];

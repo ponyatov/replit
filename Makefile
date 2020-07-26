@@ -12,21 +12,28 @@ PY  = $(CWD)/bin/python3
 PYT = $(CWD)/bin/pytest
 PEP = $(CWD)/bin/autopep8 --ignore=E26,E302,E401,E402
 
+
 OBJ = tmp/empty.o tmp/hello
 
+SRC = $(shell find $(CWD) -maxdepth 1 -type f -regex .+.py$$)
 
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
 	$(MAKE) pep
 	$(PY)   -i $(MODULE).py $(MODULE).ini
+
 .PHONY: test
 test:
 	$(MAKE) pep
 	$(PYT)  test_$(MODULE).py
+
 .PHONY: pep
 pep:
-	$(PEP) -i      $(MODULE).py
-	$(PEP) -i test_$(MODULE).py
+	echo $(SRC) | xargs -n1 -P0 $(PEP) -i
+
+.PHONY: web
+web: $(PY) webook.py
+	$^ $(SRC)
 
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
@@ -36,15 +43,30 @@ tmp/%: src/%.c
 
 
 .PHONY: install update
-install: $(OS)_install backend
-	poetry install
-update: $(OS)_update
-	poetry update
+
+install: $(PIP) backend js
+	-$(MAKE) $(OS)_install
+	$(PIP)   install    -r requirements.txt
+#	poetry install
+update: $(PIP)
+	-$(MAKE) $(OS)_update
+	$(PIP)   install -U    pip
+	$(PIP)   install -U -r requirements.txt
+	$(MAKE)  requirements.txt
+#	poetry update
+
+$(PIP) $(PY) $(PEP):
+	python3 -m venv .
+	$(PIP) install -U pip pylint autopep8
+	$(MAKE) requirements.txt
+$(PYT):
+	$(PIP) install -U pytest
+	$(MAKE) requirements.txt
 
 .PHONY: Linux_install Linux_update
 Linux_install Linux_update:
-	echo sudo apt update
-	echo sudo apt install -u `cat apt.txt`
+	sudo apt update
+	sudo apt install -u `cat apt.txt`
 
 .PHONY: venv
 venv:
@@ -55,6 +77,20 @@ venv:
 .PHONY: requirements.txt
 requirements.txt: $(PIP)
 	$< freeze | grep -v 0.0.0 > $@
+
+.PHONY: js
+js: static/jquery.js static/bootstrap.css static/bootstrap.js
+
+JQUERY_VER = 3.5.1
+static/jquery.js:
+	$(WGET) -O $@ https://code.jquery.com/jquery-$(JQUERY_VER).min.js
+
+BOOTSTRAP_VER = 3.4.1
+BOOTSTRAP_URL = https://stackpath.bootstrapcdn.com/bootstrap/$(BOOTSTRAP_VER)/
+static/bootstrap.css:
+	$(WGET) -O $@ https://bootswatch.com/3/darkly/bootstrap.min.css
+static/bootstrap.js:
+	$(WGET) -O $@ $(BOOTSTRAP_URL)/js/bootstrap.min.js
 
 
 
@@ -91,7 +127,7 @@ doxy:
 
 .PHONY: master shadow release
 
-MERGE  = Makefile README.md .gitignore .vscode apt.txt requirements.txt
+MERGE  = Makefile README.md .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
 MERGE += webook.py static templates
 
@@ -99,6 +135,7 @@ master:
 	git checkout $@
 	git pull -v
 	git checkout shadow -- $(MERGE)
+	$(MAKE) doxy
 
 shadow:
 	git checkout $@

@@ -284,6 +284,20 @@ class IO(Object):
 class File(IO):
     pass
 
+vm['MODULE'] = Module(MODULE)
+
+
+## @defgroup io IO
+## @brief base file output
+
+## @ingroup io
+class IO(Object):
+    pass
+
+## @ingroup io
+class File(IO):
+    pass
+
 ## @defgroup game Game
 ## @brief `pygame` interface
 

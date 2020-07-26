@@ -44,7 +44,8 @@
     "editor.tabSize": 4,
 
     "files.associations": {
-        // "**/templates/*.html": "django-html",
+        "**/templates/*.html": "jinja",
+        "**/templates/*.css": "jinja",
         // "**/templates/*": "django-txt",
         "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
