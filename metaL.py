@@ -97,6 +97,8 @@ class Object:
 
     ## `A[key] = B`
     def __setitem__(self, key, that):
+        if isinstance(that, str):
+            that = String(that)
         self.slot[key] = that
         return self
 
@@ -110,6 +112,8 @@ class Object:
 
     ## `A // B -> A.push(B)`
     def __floordiv__(self, that):
+        if isinstance(that, str):
+            that = String(that)
         self.nest.append(that)
         return self
 
@@ -122,6 +126,11 @@ class Object:
     ## @param[in] ctx context
     def eval(self, ctx): raise Error((self))
 
+    ## @}
+
+    ## @name html
+    ## @{
+    def html(self, ctx): return '<pre id=dump>%s</pre>' % self.dump()
     ## @}
 
 ## @defgroup error Error
@@ -150,7 +159,7 @@ class Symbol(Primitive):
 
 ## @ingroup prim
 class String(Primitive):
-    pass
+    def html(self, ctx): return self.val
 
 ## @ingroup prim
 ## floating point
@@ -245,21 +254,52 @@ class VM(Active):
 ## @ingroup active
 ## global system VM
 vm = VM(MODULE)
+vm << vm
 
+
+## @defgroup meta Meta
+## @ingroup object
+
+## @ingroup meta
+class Meta(Object):
+    pass
+
+## @ingroup meta
+class Module(Meta):
+    ## @name html
+    def html(self, ctx): return '<pre>%s</pre>' % self.val
+
+
+vm['MODULE'] = Module(MODULE)
+
+
+## @defgroup io IO
+## @brief base file output
+
+## @ingroup io
+class IO(Object):
+    pass
+
+## @ingroup io
+class File(IO):
+    pass
 
 ## @defgroup game Game
 ## @brief `pygame` interface
 
+
 import pygame
-pygame.init()
 
 ## @ingroup game
 class Game(Object):
-    pass
+    def __init__(self, V):
+        Object.__init__(self, V)
+        pygame.init()
 
 ## @ingroup game
 class Display(Game):
 
+    ## @param[in] V
     ## @param[in] W width in pixels
     ## @param[in] H height in pixels
     def __init__(self, V, W=320, H=240):
@@ -286,7 +326,9 @@ import ply.lex as lex
 ## token types
 tokens = ['symbol',
           'number', 'integer', 'hex', 'bin',
-          'add', 'sub', 'mul', 'div', 'pow']
+          'add', 'sub', 'mul', 'div', 'pow',
+          'lp', 'rp', 'lq', 'rq', 'lc', 'rc',
+          'comma', 'colon']
 
 ## @ingroup lexer
 ## drop spaces
@@ -302,8 +344,47 @@ def t_nl(t):
     r'\n'
     t.lexer.lineno += 1
 
+## @name paren
+## @{
+
+## @ingroup lexer
+def t_lp(t):
+    r'\('
+    return t
+## @ingroup lexer
+def t_rp(t):
+    r'\)'
+    return t
+## @ingroup lexer
+def t_lq(t):
+    r'\['
+    return t
+## @ingroup lexer
+def t_rq(t):
+    r'\]'
+    return t
+## @ingroup lexer
+def t_lc(t):
+    r'\{'
+    return t
+## @ingroup lexer
+def t_rc(t):
+    r'\}'
+    return t
+
+## @}
+
 ## @name operator
 ## @{
+
+## @ingroup lexer
+def t_comma(t):
+    r','
+    return t
+## @ingroup lexer
+def t_colon(t):
+    r':'
+    return t
 
 ## @ingroup lexer
 ##    r'\+'
@@ -381,7 +462,7 @@ def t_integer(t):
 ## @ingroup lexer
 ##    r`[^ \t\r\n\#\+\-\*\/\^]+`
 def t_symbol(t):
-    r'[^ \t\r\n\#\+\-\*\/\^]+'
+    r'[^ \t\r\n\#\+\-\*\/\^\\(\)\[\]\{\}]+'
     t.value = Symbol(t.value)
     return t
 
@@ -438,6 +519,11 @@ precedence = (
 )
 
 ## @ingroup parser
+def p_ex_parens(p):
+    ' ex : lp ex rp '
+    p[0] = p[2]
+
+## @ingroup parser
 ##    ' ex : add ex %prec pfx ' `+A`
 def p_ex_plus(p):
     ' ex : add ex %prec pfx '
@@ -447,6 +533,44 @@ def p_ex_plus(p):
 def p_ex_minus(p):
     ' ex : sub ex %prec pfx '
     p[0] = p[1] // p[2]
+
+## @ingroup parser
+##    ' ex : ex add ex '
+def p_ex_add(p):
+    ' ex : ex add ex '
+    p[0] = p[2] // p[1] // p[3]
+## @ingroup parser
+##    ' ex : ex sub ex '
+def p_ex_sub(p):
+    ' ex : ex sub ex '
+    p[0] = p[2] // p[1] // p[3]
+## @ingroup parser
+##    ' ex : ex mul ex '
+def p_ex_mul(p):
+    ' ex : ex mul ex '
+    p[0] = p[2] // p[1] // p[3]
+## @ingroup parser
+##    ' ex : ex div ex '
+def p_ex_div(p):
+    ' ex : ex div ex '
+    p[0] = p[2] // p[1] // p[3]
+## @ingroup parser
+##    ' ex : ex pow ex '
+def p_ex_pow(p):
+    ' ex : ex pow ex '
+    p[0] = p[2] // p[1] // p[3]
+
+## @}
+
+## @name vector
+## @{
+
+def p_ex_vector_empty(p):
+    ' ex : lq rq '
+    p[0] = Vector()
+def p_ex_vector_single(p):
+    ' ex : lq ex rq '
+    p[0] = Vector() // p[2]
 
 ## @}
 

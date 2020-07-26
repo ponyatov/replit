@@ -1,5 +1,7 @@
 {% extends 'all.html' %}
 
 {% block body %}
-<pre id=#dump>{{ vm.dump() }}</pre>
+{% autoescape off %}
+{{ctx.html(vm)}}
+{% endautoescape %}
 {% endblock %}

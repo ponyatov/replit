@@ -95,7 +95,7 @@ class TestParser:
     def test_numbers(self):
         ast = parser.parse('''
             # numbers
-            -01 +02.30 -4e+5 +6.7e-8 0xDeadBeef 0b1101
+            -01\n +02.30\n -4e+5\n +6.7e-8\n 0xDeadBeef\n 0b1101\n
             ''')
         # ast
         assert ast.test() ==\
