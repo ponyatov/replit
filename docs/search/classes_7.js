@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['integer',['Integer',['../classmetaL_1_1Integer.html',1,'metaL']]]
+  ['hex',['Hex',['../classmetaL_1_1Hex.html',1,'metaL']]]
 ];

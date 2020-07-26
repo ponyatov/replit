@@ -94,6 +94,17 @@ $(function() {
 </ul>
 </li>
 </ul>
+<h2><code><a class="el" href="namespacemetaL.html">metaL</a></code> is not a programming language</h2>
+<p><code><a class="el" href="namespacemetaL.html">metaL</a></code> <b>is a method of programming</b> in Python (or any other language you prefer: JS, PHP,...)</p>
+<p><code><a class="el" href="namespacemetaL.html">metaL</a></code> works over two key features:</p><ul>
+<li>homoiconic self-modifying data structures</li>
+<li>metaprogramming via code generation</li>
+</ul>
+<p>That's why DML/DDL syntax parser is not required and is the only an optional feature: parser was left there just to be a demo of the third magic feature of the <code><a class="el" href="namespacemetaL.html">metaL</a></code>:</p><ul>
+<li>custom user-defined syntax.</li>
+</ul>
+<p>All <code><a class="el" href="namespacemetaL.html">metaL</a></code> structures can be defined directly in the <em>host language</em> (Python), the syntax parser is only a way to do it more simplified and to work in symbiosis with Python REPL + VSCode. VSCode has the ability to send selected parts of code from a text editor to a terminal with running REPL.</p>
+<p>This sending has some disadvantage: Python's <code>input()</code> function can input only a single string, so when we send a text from a VSCode, we can't detect was it a single line or multiple lines text block. So, the syntax was chosen single-lined. It also points, that DML/DDL in <code><a class="el" href="namespacemetaL.html">metaL</a></code> is not a programming language, it's a language of CLI commands.</p>
 <h3>Concept Programming</h3>
 <p>CP here is a programming model described in the works of Enn Heraldovich Tyugu about model-based software development. It is not mean the term by Alexsandr Stepanov here. The common idea is about making domain models describe the problem in a wide in the form of relation networks, and automatic program (code) synthesis from specifications to solve concrete tasks. This synthesis works over these networks using them as <em>generic knowledge representation</em>.</p>
 <ul>

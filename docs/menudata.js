@@ -15,7 +15,10 @@ var menudata={children:[
 {text:"t",url:"namespacemembers.html#index_t"},
 {text:"v",url:"namespacemembers.html#index_v"},
 {text:"y",url:"namespacemembers.html#index_y"}]},
-{text:"Functions",url:"namespacemembers_func.html"},
+{text:"Functions",url:"namespacemembers_func.html",children:[
+{text:"i",url:"namespacemembers_func.html#index_i"},
+{text:"p",url:"namespacemembers_func.html#index_p"},
+{text:"t",url:"namespacemembers_func.html#index_t"}]},
 {text:"Variables",url:"namespacemembers_vars.html"}]}]},
 {text:"Classes",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
