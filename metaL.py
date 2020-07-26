@@ -270,9 +270,6 @@ class Module(Meta):
     def html(self, ctx): return '<pre>%s</pre>' % self.val
 
 
-vm['MODULE'] = Module(MODULE)
-
-
 ## @defgroup io IO
 ## @brief base file output
 
@@ -283,6 +280,7 @@ class IO(Object):
 ## @ingroup io
 class File(IO):
     pass
+
 
 vm['MODULE'] = Module(MODULE)
 

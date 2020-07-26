@@ -20,7 +20,7 @@ SRC = $(shell find $(CWD) -maxdepth 1 -type f -regex .+.py$$)
 .PHONY: all
 all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
 	$(MAKE) pep
-	$(PY)   -i $(MODULE).py $(MODULE).ini
+	$(PY)   $(MODULE).py $(MODULE).ini
 
 .PHONY: test
 test:
@@ -129,17 +129,18 @@ doxy:
 
 MERGE  = Makefile README.md .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
-MERGE += webook.py static templates
+MERGE += webook.py static templates doxy.gen
 
 master:
 	git checkout $@
 	git pull -v
 	git checkout shadow -- $(MERGE)
-	$(MAKE) doxy
+#	$(MAKE) doxy
 
 shadow:
 	git checkout $@
 	git pull -v
+#	$(MAKE) doxy
 
 release:
 	git tag $(NOW)-$(REL)
