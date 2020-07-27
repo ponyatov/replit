@@ -92,26 +92,64 @@ class TestParser:
         assert parser.parse('').test() ==\
             '\n<ast:>'
 
+    def test_symbol(self):
+        ast = parser.parse('MODULE')
+        assert ast.test() ==\
+            '\n<ast:>\n\t0: <symbol:MODULE>'
+        assert ast.eval(vm).test() ==\
+            '\n<ast:>\n\t0: <module:metaL>'
+
+    def test_vector_empty(self):
+        empty = parser.parse('[]')
+        assert empty.test() ==\
+            '\n<ast:>\n\t0: <vector:>'
+        assert empty.eval(vm).test() ==\
+            '\n<ast:>\n\t0: <vector:>'
+
+    def test_vector_single(self):
+        single = parser.parse('[MODULE]')
+        assert single.test() ==\
+            '\n<ast:>' +\
+            '\n\t0: <vector:>' +\
+            '\n\t\t0: <symbol:MODULE>'
+        assert single.eval(vm).test() ==\
+            '\n<ast:>' +\
+            '\n\t0: <vector:>' +\
+            '\n\t\t0: <module:metaL>'
+
+    def test_vector_multy(self):
+        multy = parser.parse('[1,2.3,MODULE]')
+        assert multy.test() ==\
+            '\n<ast:>\n\t0: <vector:>' +\
+            '\n\t\t0: <integer:1>' +\
+            '\n\t\t1: <number:2.3>' +\
+            '\n\t\t2: <symbol:MODULE>'
+        assert multy.eval(vm).test() ==\
+            '\n<ast:>\n\t0: <vector:>' +\
+            '\n\t\t0: <integer:1>' +\
+            '\n\t\t1: <number:2.3>' +\
+            '\n\t\t2: <module:metaL>'
+
     def test_numbers(self):
         ast = parser.parse('''
             # numbers
-            -01\n +02.30\n -4e+5\n +6.7e-8\n 0xDeadBeef\n 0b1101\n
+            [ -01 , +02.30 , -4e+5 , +6.7e-8 , 0xDeadBeef , 0b1101 ]
             ''')
         # ast
         assert ast.test() ==\
-            '\n<ast:>' +\
-            '\n\t0: <op:->\n\t\t0: <integer:1>' +\
-            '\n\t1: <op:+>\n\t\t0: <number:2.3>' +\
-            '\n\t2: <op:->\n\t\t0: <number:400000.0>' +\
-            '\n\t3: <op:+>\n\t\t0: <number:6.7e-08>' +\
-            '\n\t4: <hex:0xdeadbeef>' +\
-            '\n\t5: <bin:0b1101>'
+            '\n<ast:>\n\t0: <vector:>' +\
+            '\n\t\t0: <op:->\n\t\t\t0: <integer:1>' +\
+            '\n\t\t1: <op:+>\n\t\t\t0: <number:2.3>' +\
+            '\n\t\t2: <op:->\n\t\t\t0: <number:400000.0>' +\
+            '\n\t\t3: <op:+>\n\t\t\t0: <number:6.7e-08>' +\
+            '\n\t\t4: <hex:0xdeadbeef>' +\
+            '\n\t\t5: <bin:0b1101>'
         # evaled
         assert ast.eval(vm).test() ==\
-            '\n<ast:>' +\
-            '\n\t0: <integer:-1>' +\
-            '\n\t1: <number:2.3>' +\
-            '\n\t2: <number:-400000.0>' +\
-            '\n\t3: <number:6.7e-08>' +\
-            '\n\t4: <hex:0xdeadbeef>' +\
-            '\n\t5: <bin:0b1101>'
+            '\n<ast:>\n\t0: <vector:>' +\
+            '\n\t\t0: <integer:-1>' +\
+            '\n\t\t1: <number:2.3>' +\
+            '\n\t\t2: <number:-400000.0>' +\
+            '\n\t\t3: <number:6.7e-08>' +\
+            '\n\t\t4: <hex:0xdeadbeef>' +\
+            '\n\t\t5: <bin:0b1101>'

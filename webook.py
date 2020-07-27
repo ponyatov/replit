@@ -45,21 +45,6 @@ class Font(Doc):
 class Size(Doc):
     pass
 
-## @ingroup webook
-## networking object
-class Net(IO):
-    pass
-
-## @ingroup webook
-## TCP/IP address
-class Ip(Net):
-    pass
-
-## @ingroup webook
-## TCP/IP port
-class Port(Net):
-    pass
-
 
 import flask
 

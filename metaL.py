@@ -155,7 +155,8 @@ class Primitive(Object):
 
 ## @ingroup prim
 class Symbol(Primitive):
-    pass
+    ## symbol evaluates via context lookup
+    def eval(self, ctx): return ctx[self.val]
 
 ## @ingroup prim
 class String(Primitive):
@@ -209,7 +210,11 @@ class Container(Object):
 ## @ingroup cont
 ## var size array (Python list)
 class Vector(Container):
-    pass
+    def eval(self, ctx):
+        res = self.__class__(self.val)
+        for i in self.nest:
+            res // i.eval(ctx)
+        return res
 
 ## @ingroup cont
 ## FIFO stack
@@ -281,20 +286,38 @@ class IO(Object):
 class File(IO):
     pass
 
+## @defgroup net Networking
+## @ingroup io
+## networking object
+class Net(IO):
+    pass
 
+## @ingroup net
+## TCP/IP address
+class Ip(Net):
+    pass
+
+## @ingroup net
+## TCP/IP port
+class Port(Net):
+    pass
+
+## @ingroup net
+class Email(Net):
+    pass
+
+## @ingroup net
+class Url(Net):
+    pass
+
+
+## @defgroup info metainfo
 vm['MODULE'] = Module(MODULE)
-
-
-## @defgroup io IO
-## @brief base file output
-
-## @ingroup io
-class IO(Object):
-    pass
-
-## @ingroup io
-class File(IO):
-    pass
+vm['TITLE'] = TITLE
+vm['ABOUT'] = ABOUT
+vm['AUTHOR'] = String(AUTHOR) << Email(EMAIL)
+vm['YEAR'] = Integer(YEAR)
+vm['LICENSE'] = LICENSE
 
 ## @defgroup game Game
 ## @brief `pygame` interface
@@ -496,13 +519,8 @@ import ply.yacc as yacc
 
 ## @ingroup parser
 ## Abstract Syntax Tree =~= any `metaL` graph
-class AST(Object):
-    ## AST evaluates to new AST with each subelement evaluated
-    def eval(self, ctx):
-        res = AST(self.val)
-        for i in self.nest:
-            res // i.eval(ctx)
-        return res
+class AST(Vector):
+    pass
 
 ## @ingroup parser
 ##    ' REPL : '
@@ -577,12 +595,22 @@ def p_ex_pow(p):
 ## @name vector
 ## @{
 
-def p_ex_vector_empty(p):
-    ' ex : lq rq '
-    p[0] = Vector()
-def p_ex_vector_single(p):
-    ' ex : lq ex rq '
-    p[0] = Vector() // p[2]
+## @ingroup parser
+def p_ex_vector(p):
+    ' ex : lq vector rq '
+    p[0] = p[2]
+## @ingroup parser
+def p_vector_empty(p):
+    ' vector : '
+    p[0] = Vector('')
+## @ingroup parser
+def p_vector_single(p):
+    ' vector : vector ex '
+    p[0] = p[1] // p[2]
+## @ingroup parser
+def p_vector_many(p):
+    ' vector : vector comma ex '
+    p[0] = p[1] // p[3]
 
 ## @}
 
