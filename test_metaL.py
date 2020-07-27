@@ -153,3 +153,57 @@ class TestParser:
             '\n\t\t3: <number:6.7e-08>' +\
             '\n\t\t4: <hex:0xdeadbeef>' +\
             '\n\t\t5: <bin:0b1101>'
+
+class TestIntMath():
+
+    def test_plus(self):
+        ast = parser.parse('+486')[0]
+        assert ast.test() ==\
+            '\n<op:+>' +\
+            '\n\t0: <integer:486>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:486>'
+
+    def test_minus(self):
+        ast = parser.parse('- 486')[0] # spaces allowed
+        assert ast.test() ==\
+            '\n<op:->' +\
+            '\n\t0: <integer:486>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:-486>'
+
+    def test_add(self):
+        ast = parser.parse('137+349')[0]
+        assert ast.test() ==\
+            '\n<op:+>' +\
+            '\n\t0: <integer:137>' +\
+            '\n\t1: <integer:349>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:486>'
+
+    def test_sub(self):
+        ast = parser.parse('1000-334')[0]
+        assert ast.test() ==\
+            '\n<op:->' +\
+            '\n\t0: <integer:1000>' +\
+            '\n\t1: <integer:334>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:666>'
+
+    def test_mul(self):
+        ast = parser.parse('5*99')[0]
+        assert ast.test() ==\
+            '\n<op:*>' +\
+            '\n\t0: <integer:5>' +\
+            '\n\t1: <integer:99>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:495>'
+
+    def test_div(self):
+        ast = parser.parse('10/5')[0]
+        assert ast.test() ==\
+            '\n<op:/>' +\
+            '\n\t0: <integer:10>' +\
+            '\n\t1: <integer:5>'
+        assert ast.eval(vm).test() ==\
+            '\n<integer:2>'

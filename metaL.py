@@ -168,6 +168,9 @@ class Number(Primitive):
     def __init__(self, V):
         Primitive.__init__(self, float(V))
 
+    ## @name operator
+    ## @{
+
     ## `-A`
     def minus(self, ctx):
         return self.__class__(-self.val)
@@ -175,6 +178,28 @@ class Number(Primitive):
     ## `+A`
     def plus(self, ctx):
         return self.__class__(+self.val)
+
+    def add(self, that, ctx):
+        assert type(that) == self.__class__
+        return self.__class__(self.val + that.val)
+
+    def sub(self, that, ctx):
+        assert type(that) == self.__class__
+        return self.__class__(self.val - that.val)
+
+    def mul(self, that, ctx):
+        assert type(that) == self.__class__
+        return self.__class__(self.val * that.val)
+
+    def div(self, that, ctx):
+        assert type(that) == self.__class__
+        return self.__class__(self.val / that.val)
+
+    def pow(self, that, ctx):
+        assert type(that) == self.__class__
+        return self.__class__(self.val ** that.val)
+
+    ## @}
 
 ## @ingroup prim
 class Integer(Number):
@@ -247,6 +272,18 @@ class Op(Active):
                 return greedy[0].plus(ctx)
             if self.val == '-':
                 return greedy[0].minus(ctx)
+        # binary
+        if len(greedy) == 2:
+            if self.val == '+':
+                return greedy[0].add(greedy[1], ctx)
+            if self.val == '-':
+                return greedy[0].sub(greedy[1], ctx)
+            if self.val == '*':
+                return greedy[0].mul(greedy[1], ctx)
+            if self.val == '/':
+                return greedy[0].div(greedy[1], ctx)
+            if self.val == '^':
+                return greedy[0].pow(greedy[1], ctx)
         # unknown
         raise Error((self))
 

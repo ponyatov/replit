@@ -18,9 +18,11 @@ OBJ = tmp/empty.o tmp/hello
 SRC = $(shell find $(CWD) -maxdepth 1 -type f -regex .+.py$$)
 
 .PHONY: all
-all: $(PY) $(MODULE).py $(MODULE).ini $(OBJ)
+all: $(PY)   $(MODULE).py $(MODULE).ini $(OBJ)
 	$(MAKE) pep
-	$(PY)   $(MODULE).py $(MODULE).ini
+	$(MAKE) doxy
+	$(MAKE) test
+	$(PY) -i $(MODULE).py $(MODULE).ini
 
 .PHONY: test
 test:
@@ -129,7 +131,7 @@ doxy:
 
 MERGE  = Makefile README.md .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
-MERGE += webook.py static templates doxy.gen
+MERGE += webook.py static templates doxy.gen doc
 
 master:
 	git checkout $@

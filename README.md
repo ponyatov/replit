@@ -250,21 +250,22 @@ interpreters vs the compilers into machine code).
 
 ## Links
 
-[SICP] [Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html#%_toc_start)
+[SICP] [**Structure and Interpretation of Computer Programs**](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html#%_toc_start)
        Harold Abelson, Gerald Jay Sussman, Julie Sussman // MIT Press, 1996, ISBN	0-262-51087-1
 
 [iSICP] [interactive SICP](https://xuanji.appspot.com/isicp)
 
-[minsky] Marvin Minsky [Frames for data representation](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
+[minsky] Marvin Minsky [**A Framework for Representing Knowledge**](https://web.media.mit.edu/~minsky/papers/Frames/frames.html)
+// MIT-AI Laboratory Memo 306, June, 1974. Reprinted in The Psychology of Computer Vision, P. Winston (Ed.), McGraw-Hill, 1975.
 
 [tyugu] **Knowledge-Based Programming** Enn Tyugu 1988 // Addison-Wesley Longman Publishing Co., Inc.
 
 [tyuguru] Э.Х.Тыугу **Концептуальное программирование**. М.: Наука, 1984. 255 с
 
-[sym88] J. Symbolic Computation (1988) 5, 359-375\ **The Programming System PRIZ**
+[sym88] J. Symbolic Computation (1988) 5, 359-375\
+[**The Programming System PRIZ**](https://www.academia.edu/18315153/The_programming_system_PRIZ?auto=download)
 \ G.Mints, E.Tyugu, Institute of Cybernetics, Estonian Academy of
-Sciences,Tallinn 200108, USSR \
-[pdf](https://www.academia.edu/18315153/The_programming_system_PRIZ?auto=download)
+Sciences,Tallinn 200108, USSR
 
 [priz] **Инструментальная система программирования ЕС ЭВМ (ПРИЗ)** / М.И. Кахро,
 А.П. Калья, Энн Харальдович Тыугу . – Изд. 2-е – Москва : Финансы и статистика,
