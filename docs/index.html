@@ -78,6 +78,7 @@ $(function() {
 <li>take Lisp homoiconic nature and port it to CPython3 stack (VM &amp; libs)</li>
 <li>provide a light environment for <b>metaprogramming by code generation</b><ul>
 <li><code><a class="el" href="namespacemetaL.html">metaL</a></code> is a special language for writing programs that write other programs (in C &amp; Python)</li>
+<li>interactive REPL with generated code copying as system bootstrap &amp; circular redefinition is a primary method of work</li>
 </ul>
 </li>
 <li>protect people from the parens soup by using infix syntax and AST-friendly data structure in place of classic lists</li>
@@ -101,10 +102,10 @@ $(function() {
 <li>metaprogramming via code generation</li>
 </ul>
 <p>That's why DML/DDL syntax parser is not required and is the only an optional feature: parser was left there just to be a demo of the third magic feature of the <code><a class="el" href="namespacemetaL.html">metaL</a></code>:</p><ul>
-<li>custom user-defined syntax.</li>
+<li>custom user-defined syntax</li>
 </ul>
-<p>All <code><a class="el" href="namespacemetaL.html">metaL</a></code> structures can be defined directly in the <em>host language</em> (Python), the syntax parser is only a way to do it more simplified and to work in symbiosis with Python REPL + VSCode. VSCode has the ability to send selected parts of code from a text editor to a terminal with running REPL.</p>
-<p>This sending has some disadvantage: Python's <code>input()</code> function can input only a single string, so when we send a text from a VSCode, we can't detect was it a single line or multiple lines text block. So, the syntax was chosen single-lined. It also points, that DML/DDL in <code><a class="el" href="namespacemetaL.html">metaL</a></code> is not a programming language, it's a language of CLI commands.</p>
+<p>All <code><a class="el" href="namespacemetaL.html">metaL</a></code> structures can be defined directly in the <em>host language</em> (Python), the syntax parser is only a way to do it more simplified and to work in symbiosis with Python REPL + VSCode. VSCode has the ability to send selected parts of code from a text editor to a terminal with running REPL. This sending has some disadvantage: Python's <code>input()</code> function can input only a single string, so when we send a text from a VSCode, we can't detect was it a single line or multiple lines text block. So, the syntax was chosen single-lined. It also points, that DML/DDL in <code><a class="el" href="namespacemetaL.html">metaL</a></code> is not a programming language, it's a language of CLI commands.</p>
+<p>As we can use code generation for producing transformations in a host language, <em>it is possible to leave <code><a class="el" href="namespacemetaL.html">metaL</a></code> without user-defined functions</em> and continuations, which are complex to understand and implement for the newbie language designer. User function (method, new user type class) can be specified, translated into host language without its execution, resulting code should be pasted into <code><a class="el" href="metaL_8py.html" title="metaL core ">metaL.py</a></code>, and finally system restarts with this new working transformation. As <code><a class="el" href="namespacemetaL.html">metaL</a></code> were primarily designed for work with interactive code generation, such system redefinition method is suitable for use, especially if we'll have <code><a class="el" href="namespacemetaL.html">metaL</a></code> <a href="https://stackoverflow.com/questions/1481053/what-is-the-exact-definition-of-a-metacircular-interpreter">metacircular implementation</a> in the system release.</p>
 <h3>Concept Programming</h3>
 <p>CP here is a programming model described in the works of Enn Heraldovich Tyugu about model-based software development. It is not mean the term by Alexsandr Stepanov here. The common idea is about making domain models describe the problem in a wide in the form of relation networks, and automatic program (code) synthesis from specifications to solve concrete tasks. This synthesis works over these networks using them as <em>generic knowledge representation</em>.</p>
 <ul>
