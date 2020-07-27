@@ -270,3 +270,5 @@ Sciences,Tallinn 200108, USSR
 [priz] **Инструментальная система программирования ЕС ЭВМ (ПРИЗ)** / М.И. Кахро,
 А.П. Калья, Энн Харальдович Тыугу . – Изд. 2-е – Москва : Финансы и статистика,
 1988 . – 181 с ISBN 5-279-00111-2
+
+[kay15] Alan Kay, 2015: Power of Simplicity [video](https://www.youtube.com/watch?v=NdSD07U5uBs)

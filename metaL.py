@@ -12,6 +12,10 @@ LICENSE = 'MIT'
 
 import os, sys
 
+## @defgroup persist Persistence
+
+import xxhash
+
 ## @defgroup object Object
 
 ## @brief base object graph node
@@ -29,6 +33,8 @@ class Object:
         self.slot = {}
         ## nested AST = vector = stack = queue
         self.nest = []
+        ## update
+        self.sync()
 
     ## @name dump
     ## @{
@@ -119,6 +125,15 @@ class Object:
 
     ## @}
 
+    ## @name storage/hot-update
+    ## @{
+
+    ## this method must be called on any object update
+    ## (compute hash, update persistent memory,..)
+    def sync(self): pass
+
+    ## @}
+
     ## @name evaluation
     ## @{
 
@@ -161,6 +176,12 @@ class Symbol(Primitive):
 ## @ingroup prim
 class String(Primitive):
     def html(self, ctx): return self.val
+
+## @ingroup prim
+## length-limited string
+class VarChar(String):
+    def sync(self):
+        self.max = max(self.max, len(self.val))
 
 ## @ingroup prim
 ## floating point
