@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['world',['world',['../classtest__metaL_1_1TestObject.html#afd318bc002d19383660eb1012ebe6c24',1,'test_metaL::TestObject']]]
+  ['sub',['sub',['../classmetaL_1_1Number.html#ae569af68d6803694f2d0a174d1577059',1,'metaL::Number']]]
 ];

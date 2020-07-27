@@ -25,6 +25,7 @@ var searchData=
   ['plus',['plus',['../classmetaL_1_1Number.html#a222886e633e358c6e3c89925108a7848',1,'metaL::Number']]],
   ['png',['PNG',['../classwebook_1_1PNG.html',1,'webook']]],
   ['port',['Port',['../classmetaL_1_1Port.html',1,'metaL']]],
+  ['pow',['pow',['../classmetaL_1_1Number.html#a61bc50951e45db87460da4c2d9e0192c',1,'metaL::Number']]],
   ['precedence',['precedence',['../group__parser.html#gadfff79106ef6047a82ed5d9e6849c2f7',1,'metaL']]],
   ['primitive',['Primitive',['../group__prim.html',1,'']]],
   ['primitive',['Primitive',['../classmetaL_1_1Primitive.html',1,'metaL']]]
