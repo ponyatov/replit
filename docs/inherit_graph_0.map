@@ -7,34 +7,35 @@
 <area shape="rect" id="node14" href="$classmetaL_1_1IO.html" title="metaL.IO" alt="" coords="185,512,261,539"/>
 <area shape="rect" id="node23" href="$classmetaL_1_1Meta.html" title="metaL.Meta" alt="" coords="178,752,269,779"/>
 <area shape="rect" id="node25" href="$classmetaL_1_1Primitive.html" title="metaL.Primitive" alt="" coords="167,816,280,843"/>
-<area shape="rect" id="node32" href="$classmetaL_1_1Undef.html" title="undefined variable (forward assignment) " alt="" coords="175,867,272,893"/>
-<area shape="rect" id="node33" href="$classwebook_1_1Doc.html" title="webook.Doc" alt="" coords="176,208,271,235"/>
+<area shape="rect" id="node33" href="$classmetaL_1_1Undef.html" title="undefined variable (forward assignment) " alt="" coords="175,867,272,893"/>
+<area shape="rect" id="node34" href="$classwebook_1_1Doc.html" title="webook.Doc" alt="" coords="176,208,271,235"/>
 <area shape="rect" id="node5" href="$classmetaL_1_1Op.html" title="operator " alt="" coords="349,360,427,387"/>
 <area shape="rect" id="node6" href="$classmetaL_1_1VM.html" title="Virtual Machine (environment + stack + message queue) " alt="" coords="347,411,429,437"/>
 <area shape="rect" id="node8" href="$classmetaL_1_1Dict.html" title="associative array " alt="" coords="345,563,431,589"/>
 <area shape="rect" id="node9" href="$classmetaL_1_1Stack.html" title="FIFO stack. " alt="" coords="340,613,436,640"/>
 <area shape="rect" id="node10" href="$classmetaL_1_1Vector.html" title="var size array (Python list) " alt="" coords="338,664,438,691"/>
-<area shape="rect" id="node11" href="$classmetaL_1_1AST.html" title="Abstract Syntax Tree =~= any metaL graph. " alt="" coords="501,664,589,691"/>
+<area shape="rect" id="node11" href="$classmetaL_1_1AST.html" title="Abstract Syntax Tree =~= any metaL graph. " alt="" coords="505,664,593,691"/>
 <area shape="rect" id="node13" href="$classmetaL_1_1Display.html" title="metaL.Display" alt="" coords="335,715,441,741"/>
 <area shape="rect" id="node15" href="$classmetaL_1_1File.html" title="metaL.File" alt="" coords="347,461,429,488"/>
 <area shape="rect" id="node17" href="$classmetaL_1_1Net.html" title="metaL.Net" alt="" coords="347,512,429,539"/>
-<area shape="rect" id="node16" href="$classwebook_1_1PNG.html" title="webook.PNG" alt="" coords="495,335,595,361"/>
-<area shape="rect" id="node18" href="$classmetaL_1_1Email.html" title="metaL.Email" alt="" coords="497,563,592,589"/>
-<area shape="rect" id="node19" href="$classmetaL_1_1Ip.html" title="TCP/IP address. " alt="" coords="508,613,581,640"/>
-<area shape="rect" id="node20" href="$classmetaL_1_1Port.html" title="TCP/IP port. " alt="" coords="501,411,588,437"/>
-<area shape="rect" id="node21" href="$classmetaL_1_1Url.html" title="metaL.Url" alt="" coords="505,461,584,488"/>
-<area shape="rect" id="node22" href="$classwebook_1_1Web.html" title="webook.Web" alt="" coords="495,512,594,539"/>
+<area shape="rect" id="node16" href="$classwebook_1_1PNG.html" title="webook.PNG" alt="" coords="499,335,599,361"/>
+<area shape="rect" id="node18" href="$classmetaL_1_1Email.html" title="metaL.Email" alt="" coords="501,613,596,640"/>
+<area shape="rect" id="node19" href="$classmetaL_1_1Ip.html" title="TCP/IP address. " alt="" coords="512,411,585,437"/>
+<area shape="rect" id="node20" href="$classmetaL_1_1Port.html" title="TCP/IP port. " alt="" coords="505,461,592,488"/>
+<area shape="rect" id="node21" href="$classmetaL_1_1Url.html" title="metaL.Url" alt="" coords="509,512,588,539"/>
+<area shape="rect" id="node22" href="$classwebook_1_1Web.html" title="webook.Web" alt="" coords="499,563,598,589"/>
 <area shape="rect" id="node24" href="$classmetaL_1_1Module.html" title="metaL.Module" alt="" coords="336,765,440,792"/>
 <area shape="rect" id="node26" href="$classmetaL_1_1Number.html" title="floating point " alt="" coords="334,816,442,843"/>
 <area shape="rect" id="node30" href="$classmetaL_1_1String.html" title="metaL.String" alt="" coords="340,867,436,893"/>
-<area shape="rect" id="node31" href="$classmetaL_1_1Symbol.html" title="metaL.Symbol" alt="" coords="335,917,441,944"/>
-<area shape="rect" id="node27" href="$classmetaL_1_1Integer.html" title="metaL.Integer" alt="" coords="493,816,596,843"/>
-<area shape="rect" id="node28" href="$classmetaL_1_1Bin.html" title="bit string " alt="" coords="647,791,728,817"/>
-<area shape="rect" id="node29" href="$classmetaL_1_1Hex.html" title="hexadecimal machine number " alt="" coords="644,841,731,868"/>
-<area shape="rect" id="node34" href="$classwebook_1_1Color.html" title="webook.Color" alt="" coords="337,259,439,285"/>
-<area shape="rect" id="node35" href="$classwebook_1_1Font.html" title="webook.Font" alt="" coords="339,5,437,32"/>
-<area shape="rect" id="node36" href="$classwebook_1_1P.html" title="paragraph " alt="" coords="348,56,428,83"/>
-<area shape="rect" id="node37" href="$classwebook_1_1Section.html" title="webook.Section" alt="" coords="331,107,445,133"/>
-<area shape="rect" id="node38" href="$classwebook_1_1Size.html" title="webook.Size" alt="" coords="339,157,437,184"/>
-<area shape="rect" id="node39" href="$classwebook_1_1Title.html" title="webook.Title" alt="" coords="340,208,436,235"/>
+<area shape="rect" id="node32" href="$classmetaL_1_1Symbol.html" title="metaL.Symbol" alt="" coords="335,917,441,944"/>
+<area shape="rect" id="node27" href="$classmetaL_1_1Integer.html" title="metaL.Integer" alt="" coords="497,816,600,843"/>
+<area shape="rect" id="node28" href="$classmetaL_1_1Bin.html" title="bit string " alt="" coords="655,791,736,817"/>
+<area shape="rect" id="node29" href="$classmetaL_1_1Hex.html" title="hexadecimal machine number " alt="" coords="652,841,739,868"/>
+<area shape="rect" id="node31" href="$classmetaL_1_1VarChar.html" title="length&#45;limited string " alt="" coords="493,867,604,893"/>
+<area shape="rect" id="node35" href="$classwebook_1_1Color.html" title="webook.Color" alt="" coords="337,259,439,285"/>
+<area shape="rect" id="node36" href="$classwebook_1_1Font.html" title="webook.Font" alt="" coords="339,5,437,32"/>
+<area shape="rect" id="node37" href="$classwebook_1_1P.html" title="paragraph " alt="" coords="348,56,428,83"/>
+<area shape="rect" id="node38" href="$classwebook_1_1Section.html" title="webook.Section" alt="" coords="331,107,445,133"/>
+<area shape="rect" id="node39" href="$classwebook_1_1Size.html" title="webook.Size" alt="" coords="339,157,437,184"/>
+<area shape="rect" id="node40" href="$classwebook_1_1Title.html" title="webook.Title" alt="" coords="340,208,436,235"/>
 </map>

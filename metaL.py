@@ -33,8 +33,9 @@ class Object:
         self.slot = {}
         ## nested AST = vector = stack = queue
         self.nest = []
-        ## update
-        self.sync()
+        ## global storage id
+        ## @ingroup persist
+        self.gid = self.sync().gid
 
     ## @name dump
     ## @{
@@ -80,7 +81,7 @@ class Object:
     def head(self, prefix='', test=False):
         hdr = '%s<%s:%s>' % (prefix, self._type(), self._val())
         if not test:
-            hdr += ' @%x' % id(self)
+            hdr += ' #%x/%x' % (self.gid, id(self))
         return hdr
 
     def _type(self): return self.__class__.__name__.lower()
@@ -106,7 +107,7 @@ class Object:
         if isinstance(that, str):
             that = String(that)
         self.slot[key] = that
-        return self
+        return self.sync()
 
     ## `A << B ~> A[B.type] = B`
     def __lshift__(self, that):
@@ -121,7 +122,7 @@ class Object:
         if isinstance(that, str):
             that = String(that)
         self.nest.append(that)
-        return self
+        return self.sync()
 
     ## @}
 
@@ -130,7 +131,26 @@ class Object:
 
     ## this method must be called on any object update
     ## (compute hash, update persistent memory,..)
-    def sync(self): pass
+    ##
+    ## mostly used in operator methods in form of `return self.sync()`
+    ## @ingroup persist
+    ## @returns self
+    def sync(self):
+        self.gid = hash(self)
+        return self
+
+    ## fast object hashing for global storage id
+    ## @ingroup persist
+    def __hash__(self):
+        hsh = xxhash.xxh32()
+        hsh.update(self.__class__.__name__)
+        hsh.update('%s' % self.val)
+        for i in self.slot:
+            hsh.update(i)
+            hsh.update(self.slot[i].gid.to_bytes(8, 'little'))
+        for j in self.nest:
+            hsh.update(j.gid.to_bytes(8, 'little'))
+        return hsh.intdigest()
 
     ## @}
 
@@ -180,8 +200,13 @@ class String(Primitive):
 ## @ingroup prim
 ## length-limited string
 class VarChar(String):
+    def __init__(self, V):
+        self.max = len(V)
+        String.__init__(self, V)
+
     def sync(self):
         self.max = max(self.max, len(self.val))
+        return String.sync(self)
 
 ## @ingroup prim
 ## floating point

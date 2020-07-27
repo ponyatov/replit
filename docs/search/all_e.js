@@ -22,6 +22,7 @@ var searchData=
   ['p_5fvector_5fmany',['p_vector_many',['../group__parser.html#ga58b51952ab6c56ee886abe354857d242',1,'metaL']]],
   ['p_5fvector_5fsingle',['p_vector_single',['../group__parser.html#gaf635930c2580c6d889ec28d68bcb8563',1,'metaL']]],
   ['parser',['parser',['../group__parser.html#gaff73940099573f5b838a1c71331ad4f9',1,'metaL.parser()'],['../group__parser.html',1,'(Global Namespace)']]],
+  ['persistence',['Persistence',['../group__persist.html',1,'']]],
   ['plus',['plus',['../classmetaL_1_1Number.html#a222886e633e358c6e3c89925108a7848',1,'metaL::Number']]],
   ['png',['PNG',['../classwebook_1_1PNG.html',1,'webook']]],
   ['port',['Port',['../classmetaL_1_1Port.html',1,'metaL']]],
