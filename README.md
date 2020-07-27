@@ -17,6 +17,7 @@ github: https://github.com/ponyatov/replit
 * take Lisp homoiconic nature and port it to CPython3 stack (VM & libs)
 * provide a light environment for **metaprogramming by code generation**
   * `metaL` is a special language for writing programs that write other programs (in C & Python)
+  * interactive REPL with generated code copying as system bootstrap & circular redefinition is a primary method of work
 * protect people from the parens soup by using infix syntax
   and AST-friendly data structure in place of classic lists
 * integrate best features from Python, Lisp/Clojure, and Smalltalk
@@ -38,18 +39,29 @@ github: https://github.com/ponyatov/replit
 That's why DML/DDL syntax parser is not required and is the only an optional
 feature: parser was left there just to be a demo of the third magic feature of
 the `metaL`:
-* custom user-defined syntax.
+* custom user-defined syntax
 
 All `metaL` structures can be defined directly in the *host language* (Python),
 the syntax parser is only a way to do it more simplified and to work in
 symbiosis with Python REPL + VSCode. VSCode has the ability to send selected
-parts of code from a text editor to a terminal with running REPL.
+parts of code from a text editor to a terminal with running REPL. This sending
+has some disadvantage: Python's `input()` function can input only a single
+string, so when we send a text from a VSCode, we can't detect was it a single
+line or multiple lines text block. So, the syntax was chosen single-lined. It
+also points, that DML/DDL in `metaL` is not a programming language, it's a
+language of CLI commands.
 
-This sending has some disadvantage: Python's `input()` function can input only a
-single string, so when we send a text from a VSCode, we can't detect was it a
-single line or multiple lines text block. So, the syntax was chosen
-single-lined. It also points, that DML/DDL in `metaL` is not a programming
-language, it's a language of CLI commands.
+As we can use code generation for producing transformations in a host language,
+*it is possible to leave `metaL` without user-defined functions* and
+continuations, which are complex to understand and implement for the newbie
+language designer. User function (method, new user type class) can be specified,
+translated into host language without its execution, resulting code should be
+pasted into `metaL.py`, and finally system restarts with this new working
+transformation. As `metaL` were primarily designed for work with interactive
+code generation, such system redefinition method is suitable for use, especially
+if we'll have `metaL`
+[metacircular implementation](https://stackoverflow.com/questions/1481053/what-is-the-exact-definition-of-a-metacircular-interpreter)
+in the system release.
 
 ### Concept Programming
 
