@@ -128,7 +128,7 @@ $(TMP)/$(TCC_GZ):
 
 .PHONY: doxy
 doxy:
-	doxygen doxy.gen 1>/dev/null
+	rm -rf docs ; doxygen doxy.gen 1>/dev/null
 
 
 
