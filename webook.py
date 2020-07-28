@@ -1,50 +1,10 @@
 ## @file
 ## @brief Web Book engine
 
-## @defgroup webook WebBook
+## @defgroup webook WeBook
 ## @brief documenting engine /Flask/
 
 from metaL import *
-
-## @defgroup doc Documenting
-
-## @ingroup doc
-class Doc(Object):
-
-    ## @name html
-    def html(self, ctx):
-        ht = '%s<hr>' % self['title'].html(ctx)
-        for i in self.nest:
-            ht += i.html(ctx)
-        return ht
-
-## @ingroup doc
-class Title(Doc):
-    def html(self, ctx): return '<h1>%s</h1>' % self.val
-
-## @ingroup doc
-class Section(Doc):
-    pass
-
-## @ingroup doc
-## paragraph
-class P(Doc):
-    pass
-
-## @ingroup doc
-class PNG(Doc, File):
-    pass
-
-## @ingroup doc
-class Color(Doc):
-    pass
-## @ingroup doc
-class Font(Doc):
-    pass
-## @ingroup doc
-class Size(Doc):
-    pass
-
 
 import flask
 

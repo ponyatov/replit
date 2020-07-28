@@ -1,13 +1,17 @@
 ## @file
-## @brief `metaL` core
+## @brief powered by `metaL`
 
 MODULE = 'metaL'
 TITLE = '[meta]programming [L]anguage'
-ABOUT = 'homoiconic metaprogramming system'
+ABOUT = '''
+homoiconic metaprogramming system
+* powered by `metaL`'''
 AUTHOR = 'Dmitry Ponyatov'
 EMAIL = 'dponyatov@gmail.com'
 YEAR = 2020
 LICENSE = 'MIT'
+GITHUB = 'https://github.com/ponyatov'
+LOGO = 'logo.png'
 
 
 import os, sys
@@ -37,13 +41,59 @@ class Object:
         ## @ingroup persist
         self.gid = self.sync().gid
 
+    ## @name storage/hot-update
+    ## @{
+
+    ## this method must be called on any object update
+    ## (compute hash, update persistent memory,..)
+    ##
+    ## mostly used in operator methods in form of `return self.sync()`
+    ## @ingroup persist
+    ## @returns self
+    def sync(self):
+        # update global hash
+        self.gid = hash(self)
+        ## sync with storage
+        #storage.put(self)
+        return self
+
+    ## fast object hashing for global storage id
+    ## @ingroup persist
+    def __hash__(self):
+        hsh = xxhash.xxh32()
+        hsh.update(self._type())
+        hsh.update('%s' % self.val)
+        for i in self.slot:
+            hsh.update(i)
+            hsh.update(self.slot[i].gid.to_bytes(8, 'little'))
+        for j in self.nest:
+            hsh.update(j.gid.to_bytes(8, 'little'))
+        return hsh.intdigest()
+
+    ## serialize to .json
+    ## @ingroup persist
+    def json(self):
+        js = '{"gid":"%x","type":"%s","val":"%s",' % (
+            self.gid, self._type(), self.val)
+        slots = []
+        for k in sorted(self.slot.keys()):
+            slots.append('"%s":"%.8x"' % (k, self.slot[k].gid))
+        js += '"slot":{%s},' % ','.join(slots)
+        nested = []
+        for i in self.nest:
+            nest.append('"%.8x"' % i.gid)
+        js += '"nest":[%s]' % ','.join(nested)
+        return js + "}"
+
+    ## @}
+
     ## @name dump
     ## @{
 
     ## `print` callback
     def __repr__(self): return self.dump()
 
-    ## dump for tests (no sid in headers)
+    ## dump for tests (no hash/gid in headers)
     def test(self): return self.dump(test=True)
 
     ## dump in full text tree form
@@ -62,13 +112,11 @@ class Object:
         else:
             cycle.append(self)
         # slot{}s
-        for i in sorted(self.slot.keys()):
-            tree += self.slot[i].dump(cycle, depth + 1, '%s = ' % i, test)
+        for k in sorted(self.slot.keys()):
+            tree += self.slot[k].dump(cycle, depth + 1, '%s = ' % k, test)
         # nest[]ed
-        idx = 0
-        for j in self.nest:
-            tree += j.dump(cycle, depth + 1, '%s: ' % idx, test)
-            idx += 1
+        for i, j in enumerate(self.nest):
+            tree += j.dump(cycle, depth + 1, '%s: ' % i, test)
         # subtree
         return tree
 
@@ -81,7 +129,7 @@ class Object:
     def head(self, prefix='', test=False):
         hdr = '%s<%s:%s>' % (prefix, self._type(), self._val())
         if not test:
-            hdr += ' #%x/%x' % (self.gid, id(self))
+            hdr += ' #%.8x @%x' % (self.gid, id(self))
         return hdr
 
     def _type(self): return self.__class__.__name__.lower()
@@ -97,15 +145,17 @@ class Object:
     def __getitem__(self, key):
         if isinstance(key, int):
             return self.nest[key]
-        elif isinstance(key, str):
+        if isinstance(key, str):
             return self.slot[key]
-        else:
-            raise TypeError(that)
+        raise TypeError(key)
 
     ## `A[key] = B`
     def __setitem__(self, key, that):
+        assert isinstance(key, str)
         if isinstance(that, str):
             that = String(that)
+        if isinstance(that, int):
+            that = Integer(that)
         self.slot[key] = that
         return self.sync()
 
@@ -126,34 +176,6 @@ class Object:
 
     ## @}
 
-    ## @name storage/hot-update
-    ## @{
-
-    ## this method must be called on any object update
-    ## (compute hash, update persistent memory,..)
-    ##
-    ## mostly used in operator methods in form of `return self.sync()`
-    ## @ingroup persist
-    ## @returns self
-    def sync(self):
-        self.gid = hash(self)
-        return self
-
-    ## fast object hashing for global storage id
-    ## @ingroup persist
-    def __hash__(self):
-        hsh = xxhash.xxh32()
-        hsh.update(self.__class__.__name__)
-        hsh.update('%s' % self.val)
-        for i in self.slot:
-            hsh.update(i)
-            hsh.update(self.slot[i].gid.to_bytes(8, 'little'))
-        for j in self.nest:
-            hsh.update(j.gid.to_bytes(8, 'little'))
-        return hsh.intdigest()
-
-    ## @}
-
     ## @name evaluation
     ## @{
 
@@ -161,12 +183,28 @@ class Object:
     ## @param[in] ctx context
     def eval(self, ctx): raise Error((self))
 
+    ## apply as function
+    ## @param[in] that operand (function argument/s)
+    ## @param[in] ctx context
+    def apply(self, that, ctx): raise Error((self))
+
     ## @}
 
     ## @name html
     ## @{
     def html(self, ctx): return '<pre id=dump>%s</pre>' % self.dump()
     ## @}
+
+    ## @name code generation
+    ## @{
+
+    ## to generic text file: use `.json` in place of `Error`
+    def file(self): return self.json()
+    ## to Python code: use `.json` in place of `Error`
+    def py(self): return self.json()
+
+    ## @}
+
 
 ## @defgroup error Error
 ## @ingroup object
@@ -187,6 +225,7 @@ class Undef(Object):
 class Primitive(Object):
     ## primitives evaluates to itself
     def eval(self, ctx): return self
+    def file(self): return self.val
 
 ## @ingroup prim
 class Symbol(Primitive):
@@ -195,7 +234,19 @@ class Symbol(Primitive):
 
 ## @ingroup prim
 class String(Primitive):
+
     def html(self, ctx): return self.val
+
+    def _val(self):
+        s = ''
+        for c in self.val:
+            if c == '\n':
+                s += r'\n'
+            elif c == '\t':
+                s += r'\t'
+            else:
+                s += c
+        return s
 
 ## @ingroup prim
 ## length-limited string
@@ -217,32 +268,37 @@ class Number(Primitive):
     ## @name operator
     ## @{
 
-    ## `-A`
-    def minus(self, ctx):
-        return self.__class__(-self.val)
-
     ## `+A`
     def plus(self, ctx):
         return self.__class__(+self.val)
 
+    ## `-A`
+    def minus(self, ctx):
+        return self.__class__(-self.val)
+
+    ## `A + B`
     def add(self, that, ctx):
-        assert type(that) == self.__class__
+        assert type(self) == type(that)
         return self.__class__(self.val + that.val)
 
+    ## `A - B`
     def sub(self, that, ctx):
-        assert type(that) == self.__class__
+        assert type(self) == type(that)
         return self.__class__(self.val - that.val)
 
+    ## `A * B`
     def mul(self, that, ctx):
-        assert type(that) == self.__class__
+        assert type(self) == type(that)
         return self.__class__(self.val * that.val)
 
+    ## `A / B`
     def div(self, that, ctx):
-        assert type(that) == self.__class__
+        assert type(self) == type(that)
         return self.__class__(self.val / that.val)
 
+    ## `A ^ B`
     def pow(self, that, ctx):
-        assert type(that) == self.__class__
+        assert type(self) == type(that)
         return self.__class__(self.val ** that.val)
 
     ## @}
@@ -307,6 +363,11 @@ class Active(Object):
     pass
 
 ## @ingroup active
+## function
+class Fn(Active):
+    pass
+
+## @ingroup active
 ## operator
 class Op(Active):
     def eval(self, ctx):
@@ -367,6 +428,64 @@ class IO(Object):
 
 ## @ingroup io
 class File(IO):
+    def __init__(self, V):
+        IO.__init__(self, V)
+        self.fh = None
+
+    def __floordiv__(self, that):
+        if isinstance(that, str):
+            that = String(that)
+        IO.__floordiv__(self, that)
+        if self.fh:
+            self.fh.write('%s\n' % that.val)
+            self.fh.flush()
+        return self
+
+## @defgroup doc Documenting
+
+## @ingroup doc
+class Doc(Object):
+
+    ## @name html
+    def html(self, ctx):
+        ht = '%s<hr>' % self['title'].html(ctx)
+        for i in self.nest:
+            ht += i.html(ctx)
+        return ht
+
+## @ingroup doc
+class Title(Doc):
+    def html(self, ctx): return '<h1>%s</h1>' % self.val
+
+## @ingroup doc
+class Author(Doc):
+    pass
+
+## @ingroup doc
+class License(Doc):
+    pass
+
+## @ingroup doc
+class Section(Doc):
+    pass
+
+## @ingroup doc
+## paragraph
+class P(Doc):
+    pass
+
+## @ingroup doc
+class PNG(Doc, File):
+    pass
+
+## @ingroup doc
+class Color(Doc):
+    pass
+## @ingroup doc
+class Font(Doc):
+    pass
+## @ingroup doc
+class Size(Doc):
     pass
 
 ## @defgroup net Networking
@@ -401,40 +520,6 @@ vm['ABOUT'] = ABOUT
 vm['AUTHOR'] = String(AUTHOR) << Email(EMAIL)
 vm['YEAR'] = Integer(YEAR)
 vm['LICENSE'] = LICENSE
-
-## @defgroup game Game
-## @brief `pygame` interface
-
-
-import pygame
-
-## @ingroup game
-class Game(Object):
-    def __init__(self, V):
-        Object.__init__(self, V)
-        pygame.init()
-
-## @ingroup game
-class Display(Game):
-
-    ## @param[in] V
-    ## @param[in] W width in pixels
-    ## @param[in] H height in pixels
-    def __init__(self, V, W=320, H=240):
-        Game.__init__(self, V)
-        self['W'] = Integer(W)
-        self['H'] = Integer(H)
-
-    ## show game window on execution
-    def eval(self, ctx):
-        W = self['W'].val
-        H = self['H'].val
-        self.display = pygame.display.set_mode((W, H))
-        return self
-
-
-vm['game'] = Game(MODULE) << Display(MODULE)
-
 
 ## @defgroup lexer lexer
 ## @ingroup parser

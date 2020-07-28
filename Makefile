@@ -37,6 +37,11 @@ pep:
 web: $(PY) webook.py
 	$^ $(SRC)
 
+.PHONY: meta
+meta: $(PY) metacircular.py
+	$(MAKE) doxy
+	$(PY) -i metacircular.py
+
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
 tmp/%: src/%.c
@@ -130,8 +135,9 @@ doxy:
 .PHONY: master shadow release
 
 MERGE  = Makefile README.md .vscode apt.txt requirements.txt
-MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
+MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py game.py
 MERGE += webook.py static templates doxy.gen doc
+MERGE += metacircular.py
 
 master:
 	git checkout $@
