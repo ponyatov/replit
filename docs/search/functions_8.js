@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sub',['sub',['../classmetaL_1_1Number.html#ae569af68d6803694f2d0a174d1577059',1,'metaL::Number']]],
-  ['sync',['sync',['../group__persist.html#ga436db7cb43830723e880b2ac862b3a99',1,'metaL.Object.sync()'],['../classmetaL_1_1VarChar.html#a92e2d87eed24917d78e1f58c7ad5c8e3',1,'metaL.VarChar.sync()']]]
+  ['minus',['minus',['../classmetaL_1_1Number.html#a746c07ac0c3f951c2a3f0e6a121ac747',1,'metaL::Number']]],
+  ['mul',['mul',['../classmetaL_1_1Number.html#ad9523416b3e6808f5adb2afe016be658',1,'metaL::Number']]]
 ];

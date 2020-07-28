@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['max',['max',['../classmetaL_1_1VarChar.html#ad400b5b86adc25471da50defb70ff16e',1,'metaL::VarChar']]],
-  ['module',['MODULE',['../namespacemetaL.html#aca05e8d244cbfd5205c565d1db52a6b7',1,'metaL']]]
+  ['lexer',['lexer',['../group__lexer.html#ga101babfc77a2eedfd55778d01fde6dfe',1,'metaL']]],
+  ['license',['LICENSE',['../namespacemetaL.html#ac05ab20ab9d757da22197345deed6569',1,'metaL.LICENSE()'],['../group__circ.html#gad77f4e80c8de97e6e944797da2180137',1,'metacircular.LICENSE()']]],
+  ['logo',['LOGO',['../namespacemetaL.html#aadbbfd2b4d259bafffa90a58c677c26f',1,'metaL.LOGO()'],['../group__circ.html#ga5d0a8ac361ed0bd4ccffbc5d69b91958',1,'metacircular.LOGO()']]]
 ];

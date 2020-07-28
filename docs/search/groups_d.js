@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['webbook',['WebBook',['../group__webook.html',1,'']]]
+  ['webook',['WeBook',['../group__webook.html',1,'']]]
 ];

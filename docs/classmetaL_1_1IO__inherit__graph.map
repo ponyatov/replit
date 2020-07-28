@@ -1,11 +1,11 @@
 <map id="metaL.IO" name="metaL.IO">
-<area shape="rect" id="node3" href="$classmetaL_1_1File.html" title="metaL.File" alt="" coords="127,155,210,181"/>
-<area shape="rect" id="node5" href="$classmetaL_1_1Net.html" title="metaL.Net" alt="" coords="295,155,378,181"/>
-<area shape="rect" id="node2" href="$classmetaL_1_1Object.html" title="base object graph node " alt="" coords="172,5,272,32"/>
-<area shape="rect" id="node4" href="$classwebook_1_1PNG.html" title="webook.PNG" alt="" coords="5,229,105,256"/>
-<area shape="rect" id="node6" href="$classmetaL_1_1Email.html" title="metaL.Email" alt="" coords="129,229,224,256"/>
-<area shape="rect" id="node7" href="$classmetaL_1_1Ip.html" title="TCP/IP address. " alt="" coords="248,229,321,256"/>
-<area shape="rect" id="node8" href="$classmetaL_1_1Port.html" title="TCP/IP port. " alt="" coords="345,229,432,256"/>
-<area shape="rect" id="node9" href="$classmetaL_1_1Url.html" title="metaL.Url" alt="" coords="456,229,535,256"/>
-<area shape="rect" id="node10" href="$classwebook_1_1Web.html" title="webook.Web" alt="" coords="559,229,658,256"/>
+<area shape="rect" id="node3" href="$classmetaL_1_1File.html" title="metaL.File" alt="" coords="121,155,204,181"/>
+<area shape="rect" id="node5" href="$classmetaL_1_1Net.html" title="metaL.Net" alt="" coords="287,155,369,181"/>
+<area shape="rect" id="node2" href="$classmetaL_1_1Object.html" title="base object graph node " alt="" coords="166,5,266,32"/>
+<area shape="rect" id="node4" href="$classmetaL_1_1PNG.html" title="metaL.PNG" alt="" coords="5,229,96,256"/>
+<area shape="rect" id="node6" href="$classmetaL_1_1Email.html" title="metaL.Email" alt="" coords="121,229,215,256"/>
+<area shape="rect" id="node7" href="$classmetaL_1_1Ip.html" title="TCP/IP address. " alt="" coords="239,229,313,256"/>
+<area shape="rect" id="node8" href="$classmetaL_1_1Port.html" title="TCP/IP port. " alt="" coords="337,229,423,256"/>
+<area shape="rect" id="node9" href="$classmetaL_1_1Url.html" title="metaL.Url" alt="" coords="447,229,526,256"/>
+<area shape="rect" id="node10" href="$classwebook_1_1Web.html" title="webook.Web" alt="" coords="551,229,649,256"/>
 </map>
