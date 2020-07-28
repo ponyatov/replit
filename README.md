@@ -271,4 +271,37 @@ Sciences,Tallinn 200108, USSR
 А.П. Калья, Энн Харальдович Тыугу . – Изд. 2-е – Москва : Финансы и статистика,
 1988 . – 181 с ISBN 5-279-00111-2
 
-[kay15] Alan Kay, 2015: Power of Simplicity [video](https://www.youtube.com/watch?v=NdSD07U5uBs)
+[actor] Hewitt, Meijer and Szyperski
+[The Actor Model (everything you wanted to know...)](https://www.youtube.com/watch?v=7erJ1DV_Tlo)
+
+### UnisonWeb
+
+`metaL` grabs a great idea about immutable, homoiconic, and distributed data
+structures from the `Unison` language. It is also important to note the method
+of building the distributed knowledge database using incremental computation of
+data elements.
+
+* **The Unison language** https://www.unisonweb.org
+  * https://www.youtube.com/watch?v=yicXcdLI2YA
+
+### Smalltalk language and pure OOP
+
+`metaL` does not follow the Smalltalk language semantics, and especially its
+strange syntax, but it looks very closely on its message-passing computation
+model, especially in terms of async messaging in the [actor] model. To
+understand the nature and the power of Smalltalk without the need of installing
+or learning it you can see two next intro videos; don't skip a few firsts in
+[lawson] playlist where you can see the magic of Smalltalk's interactive
+debugging and persistent memory.
+
+[lawson] https://www.youtube.com/playlist?list=PL6601A198DF14788D
+
+[kay15] Alan Kay, 2015: [Power of Simplicity](https://www.youtube.com/watch?v=NdSD07U5uBs)
+
+http://stephane.ducasse.free.fr/FreeBooks/
+
+[blue] Adele Goldberg, David Robson
+[Smalltalk-80: The Language and its Implementation](http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf)
+XeroxParc lab, Addison-Wesley, 1983
+
+[little] Tim Budd [A Little Smalltalk](http://stephane.ducasse.free.fr/FreeBooks/LittleSmalltalk/ALittleSmalltalk.pdf) Addison-Wesley 1987
