@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['slot',['slot',['../classmetaL_1_1Object.html#a8ec1ff04d05d52ef03fbb84d15d54f0d',1,'metaL::Object']]]
+  ['readme',['README',['../group__demos.html#gaa2a03124bd50c8bf0b34c39ce5967f32',1,'demos']]],
+  ['redmine',['redmine',['../group__redmine.html#gacd86031742f87dedf2b741d91bf45d14',1,'redmine']]]
 ];

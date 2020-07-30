@@ -69,12 +69,16 @@ $(function() {
 <div class="title">parser</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>optional</code> syntax parser for CLI DML/DDL  
+<a href="#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for parser:</div>
 <div class="dyncontent">
 <center><table><tr><td><img src="group__parser.png" border="0" alt="" usemap="#group____parser"/>
 <map name="group____parser" id="group____parser">
-<area shape="rect" id="node1" href="group__lexer.html" title="lexer" alt="" coords="112,5,163,32"/>
+<area shape="rect" id="node1" href="group__repl.html" title="Read&#45;Eval&#45;Print&#45;Loop: interactive command line. " alt="" coords="112,5,169,32"/>
+<area shape="rect" id="node2" href="group__lexer.html" title="lexer" alt="" coords="115,56,166,83"/>
 </map>
 </td></tr></table></center>
 </div>
@@ -82,6 +86,9 @@ Collaboration diagram for parser:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 Modules</h2></td></tr>
 <tr class="memitem:group__lexer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__lexer.html">lexer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__repl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__repl.html">REPL</a></td></tr>
+<tr class="memdesc:group__repl"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-Eval-Print-Loop: interactive command line. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -98,6 +105,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga7b9481e299b8a71039c0d5f1c2b3fe35"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga7b9481e299b8a71039c0d5f1c2b3fe35">metaL.p_REPL_recursion</a> (p)</td></tr>
 <tr class="memdesc:ga7b9481e299b8a71039c0d5f1c2b3fe35"><td class="mdescLeft">&#160;</td><td class="mdescRight">' REPL : REPL ex ' collect every parsed [ex]pression  <a href="group__parser.html#ga7b9481e299b8a71039c0d5f1c2b3fe35">More...</a><br /></td></tr>
 <tr class="separator:ga7b9481e299b8a71039c0d5f1c2b3fe35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga189551c54ad619b87686c566ff6b507f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga189551c54ad619b87686c566ff6b507f">metaL.p_REPL_exit</a> (p)</td></tr>
+<tr class="memdesc:ga189551c54ad619b87686c566ff6b507f"><td class="mdescLeft">&#160;</td><td class="mdescRight">' REPL : exit ' process <code>exit()</code> as special CLI command  <a href="group__parser.html#ga189551c54ad619b87686c566ff6b507f">More...</a><br /></td></tr>
+<tr class="separator:ga189551c54ad619b87686c566ff6b507f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga061d34404a8488fe523396b913ff7ac8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga061d34404a8488fe523396b913ff7ac8">metaL.p_ex_symbol</a> (p)</td></tr>
 <tr class="memdesc:ga061d34404a8488fe523396b913ff7ac8"><td class="mdescLeft">&#160;</td><td class="mdescRight">' ex : symbol '  <a href="group__parser.html#ga061d34404a8488fe523396b913ff7ac8">More...</a><br /></td></tr>
 <tr class="separator:ga061d34404a8488fe523396b913ff7ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,8 +125,6 @@ Variables</h2></td></tr>
 operator</h2></td></tr>
 <tr class="memitem:gadfff79106ef6047a82ed5d9e6849c2f7"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gadfff79106ef6047a82ed5d9e6849c2f7">metaL.precedence</a></td></tr>
 <tr class="separator:gadfff79106ef6047a82ed5d9e6849c2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa2af4e69d80d89c8b21ef52207f18039"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gaa2af4e69d80d89c8b21ef52207f18039">metaL.p_ex_parens</a> (p)</td></tr>
-<tr class="separator:gaa2af4e69d80d89c8b21ef52207f18039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaba9c8c04083f6a4643266a1d2f4968cf"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gaba9c8c04083f6a4643266a1d2f4968cf">metaL.p_ex_plus</a> (p)</td></tr>
 <tr class="memdesc:gaba9c8c04083f6a4643266a1d2f4968cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">' ex : add ex prec pfx ' <code>+A</code>  <a href="group__parser.html#gaba9c8c04083f6a4643266a1d2f4968cf">More...</a><br /></td></tr>
 <tr class="separator:gaba9c8c04083f6a4643266a1d2f4968cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,6 +167,13 @@ operator</h2></td></tr>
 <tr class="separator:gabb9525c17a731b6042625e9ef49ba8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+parens</h2></td></tr>
+<tr class="memitem:gaa2af4e69d80d89c8b21ef52207f18039"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gaa2af4e69d80d89c8b21ef52207f18039">metaL.p_ex_parens</a> (p)</td></tr>
+<tr class="separator:gaa2af4e69d80d89c8b21ef52207f18039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4dbbd28f7cef629f09a9c12a2863c187"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#ga4dbbd28f7cef629f09a9c12a2863c187">metaL.p_ex_curles</a> (p)</td></tr>
+<tr class="separator:ga4dbbd28f7cef629f09a9c12a2863c187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 vector</h2></td></tr>
 <tr class="memitem:gabb598160392b6445a248070952bc70c7"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parser.html#gabb598160392b6445a248070952bc70c7">metaL.p_ex_vector</a> (p)</td></tr>
 <tr class="separator:gabb598160392b6445a248070952bc70c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,6 +200,7 @@ number</h2></td></tr>
 <tr class="separator:ga207f1f4bfa34ec6bbffd44fa82f3e49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p><code>optional</code> syntax parser for CLI DML/DDL </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga8650c4e869c854263880a1b77d1fe777"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8650c4e869c854263880a1b77d1fe777">&#9670;&nbsp;</a></span>p_error()</h2>
@@ -243,6 +259,24 @@ number</h2></td></tr>
 </div><div class="memdoc">
 
 <p>r' ex : bin ' </p>
+
+</div>
+</div>
+<a id="ga4dbbd28f7cef629f09a9c12a2863c187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4dbbd28f7cef629f09a9c12a2863c187">&#9670;&nbsp;</a></span>p_ex_curles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def metaL.p_ex_curles </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -479,6 +513,26 @@ number</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga189551c54ad619b87686c566ff6b507f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga189551c54ad619b87686c566ff6b507f">&#9670;&nbsp;</a></span>p_REPL_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def metaL.p_REPL_exit </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>' REPL : exit ' process <code>exit()</code> as special CLI command </p>
 
 </div>
 </div>

@@ -6,6 +6,7 @@ var searchData=
   ['t_5fcolon',['t_colon',['../group__parser.html#ga58038608dd3799284aaeca2407b01385',1,'metaL']]],
   ['t_5fcomma',['t_comma',['../group__parser.html#gae020f75a23ad0d775e0a8481079fb8e4',1,'metaL']]],
   ['t_5fdiv',['t_div',['../group__parser.html#gacd8fb3d2ec50e20f460eec4fc2800310',1,'metaL']]],
+  ['t_5fexit',['t_exit',['../group__lexer.html#ga147aa83b2dd2201fde534c95ed96798b',1,'metaL']]],
   ['t_5fhex',['t_hex',['../group__lexer.html#ga5caf73815a1496144f32660898a21964',1,'metaL']]],
   ['t_5fignore',['t_ignore',['../group__lexer.html#gace3d26619631fd6fdbb32261e904167a',1,'metaL']]],
   ['t_5fignore_5fcomment',['t_ignore_comment',['../group__lexer.html#ga88d3b2297708e87d8876f2ba12b96bab',1,'metaL']]],
@@ -53,7 +54,7 @@ var searchData=
   ['testobject',['TestObject',['../classtest__metaL_1_1TestObject.html',1,'test_metaL']]],
   ['testparser',['TestParser',['../classtest__metaL_1_1TestParser.html',1,'test_metaL']]],
   ['testprimitive',['TestPrimitive',['../classtest__metaL_1_1TestPrimitive.html',1,'test_metaL']]],
-  ['title',['Title',['../classmetaL_1_1Title.html',1,'metaL.Title'],['../namespacemetaL.html#adb1975517130abcb612bb78b3846b260',1,'metaL.TITLE()'],['../group__circ.html#gaff05c9790d9982ff648fba957beddf18',1,'metacircular.TITLE()']]],
+  ['title',['Title',['../classmetaL_1_1Title.html',1,'metaL.Title'],['../group__info.html#ga200c3999a61f52c347270452e9ed094a',1,'metaL.TITLE()'],['../group__minfo.html#gaff05c9790d9982ff648fba957beddf18',1,'metacircular.TITLE()'],['../group__demos.html#ga76d04d1fd87b66e20f7d2ce5343711fe',1,'demos.TITLE()']]],
   ['tokens',['tokens',['../group__lexer.html#ga8383b5e06f5dd4e0811107934bb747bf',1,'metaL']]],
   ['tutorial',['Tutorial',['../tutorial.html',1,'']]],
   ['tutorial_2emd',['tutorial.md',['../tutorial_8md.html',1,'']]]

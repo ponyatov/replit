@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['system_20init',['system init',['../group__init.html',1,'']]]
+  ['redmine',['Redmine',['../group__redmine.html',1,'']]],
+  ['repl',['REPL',['../group__repl.html',1,'']]]
 ];

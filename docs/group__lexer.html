@@ -72,7 +72,7 @@ Collaboration diagram for lexer:</div>
 <div class="dyncontent">
 <center><table><tr><td><img src="group__lexer.png" border="0" alt="" usemap="#group____lexer"/>
 <map name="group____lexer" id="group____lexer">
-<area shape="rect" id="node2" href="group__parser.html" title="parser" alt="" coords="5,5,64,32"/>
+<area shape="rect" id="node2" href="group__parser.html" title="optional syntax parser for CLI DML/DDL " alt="" coords="5,5,64,32"/>
 </map>
 </td></tr></table></center>
 </div>
@@ -82,6 +82,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaff91c8f9aa332b67c409e78cd7335fef"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__lexer.html#gaff91c8f9aa332b67c409e78cd7335fef">metaL.t_nl</a> (t)</td></tr>
 <tr class="memdesc:gaff91c8f9aa332b67c409e78cd7335fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">increment line counter on every new line  <a href="group__lexer.html#gaff91c8f9aa332b67c409e78cd7335fef">More...</a><br /></td></tr>
 <tr class="separator:gaff91c8f9aa332b67c409e78cd7335fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga147aa83b2dd2201fde534c95ed96798b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__lexer.html#ga147aa83b2dd2201fde534c95ed96798b">metaL.t_exit</a> (t)</td></tr>
+<tr class="memdesc:ga147aa83b2dd2201fde534c95ed96798b"><td class="mdescLeft">&#160;</td><td class="mdescRight">process <code>exit()</code> as special CLI command  <a href="group__lexer.html#ga147aa83b2dd2201fde534c95ed96798b">More...</a><br /></td></tr>
+<tr class="separator:ga147aa83b2dd2201fde534c95ed96798b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2e559c97a22b3e9e783ec624a22b2553"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__lexer.html#ga2e559c97a22b3e9e783ec624a22b2553">metaL.t_ANY_error</a> (t)</td></tr>
 <tr class="memdesc:ga2e559c97a22b3e9e783ec624a22b2553"><td class="mdescLeft">&#160;</td><td class="mdescRight">lexer error callback  <a href="group__lexer.html#ga2e559c97a22b3e9e783ec624a22b2553">More...</a><br /></td></tr>
 <tr class="separator:ga2e559c97a22b3e9e783ec624a22b2553"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -274,6 +277,26 @@ lexeme</h2></td></tr>
 </div><div class="memdoc">
 
 <p>r'\/' </p>
+
+</div>
+</div>
+<a id="ga147aa83b2dd2201fde534c95ed96798b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga147aa83b2dd2201fde534c95ed96798b">&#9670;&nbsp;</a></span>t_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def metaL.t_exit </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>process <code>exit()</code> as special CLI command </p>
 
 </div>
 </div>
@@ -626,7 +649,7 @@ lexeme</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  [<span class="stringliteral">&#39;symbol&#39;</span>,</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;          <span class="stringliteral">&#39;number&#39;</span>, <span class="stringliteral">&#39;integer&#39;</span>, <span class="stringliteral">&#39;hex&#39;</span>, <span class="stringliteral">&#39;bin&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;          <span class="stringliteral">&#39;add&#39;</span>, <span class="stringliteral">&#39;sub&#39;</span>, <span class="stringliteral">&#39;mul&#39;</span>, <span class="stringliteral">&#39;div&#39;</span>, <span class="stringliteral">&#39;pow&#39;</span>,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;          <span class="stringliteral">&#39;lp&#39;</span>, <span class="stringliteral">&#39;rp&#39;</span>, <span class="stringliteral">&#39;lq&#39;</span>, <span class="stringliteral">&#39;rq&#39;</span>, <span class="stringliteral">&#39;lc&#39;</span>, <span class="stringliteral">&#39;rc&#39;</span>,</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;          <span class="stringliteral">&#39;comma&#39;</span>, <span class="stringliteral">&#39;colon&#39;</span>]</div></div><!-- fragment -->
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  [<span class="stringliteral">&#39;symbol&#39;</span>,</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;          <span class="stringliteral">&#39;number&#39;</span>, <span class="stringliteral">&#39;integer&#39;</span>, <span class="stringliteral">&#39;hex&#39;</span>, <span class="stringliteral">&#39;bin&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;          <span class="stringliteral">&#39;add&#39;</span>, <span class="stringliteral">&#39;sub&#39;</span>, <span class="stringliteral">&#39;mul&#39;</span>, <span class="stringliteral">&#39;div&#39;</span>, <span class="stringliteral">&#39;pow&#39;</span>,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;          <span class="stringliteral">&#39;lp&#39;</span>, <span class="stringliteral">&#39;rp&#39;</span>, <span class="stringliteral">&#39;lq&#39;</span>, <span class="stringliteral">&#39;rq&#39;</span>, <span class="stringliteral">&#39;lc&#39;</span>, <span class="stringliteral">&#39;rc&#39;</span>,</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;          <span class="stringliteral">&#39;comma&#39;</span>, <span class="stringliteral">&#39;colon&#39;</span>,</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;          <span class="stringliteral">&#39;exit&#39;</span>]</div></div><!-- fragment -->
 <p>token types </p>
 
 </div>
