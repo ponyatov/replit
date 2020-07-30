@@ -1,3 +1,6 @@
+## @file
+## @brief `pygame` interface
+
 ## @defgroup game Game
 ## @brief `pygame` interface
 

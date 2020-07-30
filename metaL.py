@@ -1,22 +1,23 @@
 ## @file
 ## @brief powered by `metaL`
 
+## @defgroup info metainfo
+## @{
 MODULE = 'metaL'
 TITLE = '[meta]programming [L]anguage'
-ABOUT = '''
-homoiconic metaprogramming system
-* powered by `metaL`'''
+ABOUT = 'homoiconic metaprogramming system\n* powered by `metaL`'
 AUTHOR = 'Dmitry Ponyatov'
 EMAIL = 'dponyatov@gmail.com'
 YEAR = 2020
 LICENSE = 'MIT'
 GITHUB = 'https://github.com/ponyatov'
 LOGO = 'logo.png'
+## @}
 
-
-import os, sys
+import os, sys, random
 
 ## @defgroup persist Persistence
+## @brief inherit `Unison` *immutable global storage*: https://www.unisonweb.org
 
 import xxhash
 
@@ -427,6 +428,21 @@ class IO(Object):
     pass
 
 ## @ingroup io
+class Dir(IO):
+    def __init__(self, V):
+        IO.__init__(self, V)
+        try:
+            os.mkdir(self.val)
+        except FileExistsError:
+            pass
+
+    ## append file
+    def __floordiv__(self, that):
+        assert isinstance(that, File)
+        that.fh = open('%s/%s' % (self.val, that.val), 'w')
+        return IO.__floordiv__(self, that)
+
+## @ingroup io
 class File(IO):
     def __init__(self, V):
         IO.__init__(self, V)
@@ -512,14 +528,28 @@ class Email(Net):
 class Url(Net):
     pass
 
+## @ingroup net
+class User(Net):
+    pass
 
-## @defgroup info metainfo
-vm['MODULE'] = Module(MODULE)
-vm['TITLE'] = TITLE
-vm['ABOUT'] = ABOUT
-vm['AUTHOR'] = String(AUTHOR) << Email(EMAIL)
-vm['YEAR'] = Integer(YEAR)
-vm['LICENSE'] = LICENSE
+## @ingroup net
+## password
+class Pswd(Net):
+    def _val(self): return '*' * random.randint(5, 11)
+
+
+## @ingroup info
+## @{
+vm['MODULE'] = MODULE = Module(MODULE)
+vm['TITLE'] = TITLE = Title(TITLE)
+vm['ABOUT'] = ABOUT = String(ABOUT)
+vm['EMAIL'] = EMAIL = Email(EMAIL)
+vm['AUTHOR'] = AUTHOR = Author(AUTHOR) << EMAIL
+vm['YEAR'] = YEAR = Integer(YEAR)
+vm['LICENSE'] = LICENSE = License(LICENSE)
+vm['GITHUB'] = GITHUB = Url(GITHUB)
+vm['LOGO'] = LOGO = PNG(LOGO)
+## @}
 
 ## @defgroup lexer lexer
 ## @ingroup parser
@@ -531,7 +561,8 @@ tokens = ['symbol',
           'number', 'integer', 'hex', 'bin',
           'add', 'sub', 'mul', 'div', 'pow',
           'lp', 'rp', 'lq', 'rq', 'lc', 'rc',
-          'comma', 'colon']
+          'comma', 'colon',
+          'exit']
 
 ## @ingroup lexer
 ## drop spaces
@@ -546,6 +577,12 @@ t_ignore_comment = r'\#.*'
 def t_nl(t):
     r'\n'
     t.lexer.lineno += 1
+
+## @ingroup lexer
+## process `exit()` as special CLI command
+def t_exit(t):
+    r'exit\(\)'
+    return t
 
 ## @name paren
 ## @{
@@ -682,6 +719,7 @@ lexer = lex.lex()
 
 
 ## @defgroup parser parser
+## @brief `optional` syntax parser for CLI DML/DDL
 
 import ply.yacc as yacc
 
@@ -704,6 +742,13 @@ def p_REPL_recursion(p):
     ' REPL : REPL ex '
     p[0] = p[1] // p[2]
 
+## @ingroup parser
+##    ' REPL : exit '
+## process `exit()` as special CLI command
+def p_REPL_exit(p):
+    ' REPL : exit '
+    p[0] = None
+
 ## @name operator
 ## @{
 
@@ -715,11 +760,6 @@ precedence = (
     ('left', 'pow', ),
     ('left', 'pfx', ),
 )
-
-## @ingroup parser
-def p_ex_parens(p):
-    ' ex : lp ex rp '
-    p[0] = p[2]
 
 ## @ingroup parser
 ##    ' ex : add ex %prec pfx ' `+A`
@@ -757,6 +797,21 @@ def p_ex_div(p):
 def p_ex_pow(p):
     ' ex : ex pow ex '
     p[0] = p[2] // p[1] // p[3]
+
+## @}
+
+## @name parens
+## @{
+
+## @ingroup parser
+def p_ex_parens(p):
+    ' ex : lp ex rp '
+    p[0] = p[2]
+
+## @ingroup parser
+def p_ex_curles(p):
+    ' ex : lc ex rc '
+    p[0] = Fn('') // p[2]
 
 ## @}
 
@@ -823,6 +878,34 @@ def p_error(p): raise SyntaxError(p)
 ## PLY parser
 parser = yacc.yacc(debug=False, write_tables=False)
 
+## @defgroup repl REPL
+## @ingroup parser
+## @brief Read-Eval-Print-Loop: interactive command line
+
+
+## @ingroup repl
+## process command/script (in optional DDL/DML syntax)
+## @exception TypeError on `exit()` in CLI
+## (to be compatible with Python interactive session & VSCode)
+def metaL(src):
+    import traceback
+    for ast in parser.parse(src):
+        print(ast)
+        try:
+            print(ast.eval(vm))
+            print(vm)
+        except Exception as e:
+            traceback.print_exc()
+        print('-' * 66)
+
+## @ingroup repl
+def REPL():
+    while True:
+        command = input(vm.head(test=True) + ' ')
+        try:
+            metaL(command)
+        except TypeError: # executes on `exit()` in REPL input
+            os._exit(0)
 
 ## @defgroup init system init
 
@@ -831,12 +914,9 @@ parser = yacc.yacc(debug=False, write_tables=False)
 def init():
     for init in sys.argv[1:]:
         with open(init) as src:
-            for ast in parser.parse(src.read()):
-                print(ast)
-                print(ast.eval(vm))
-                print('-' * 66)
+            metaL(src.read())
 
 
 if __name__ == '__main__':
     init()
-    print(vm)
+    REPL()

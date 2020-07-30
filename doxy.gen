@@ -790,8 +790,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = README.md metaL.py test_metaL.py webook.py game.py \
-                            metacircular.py \
+INPUT                  = README.md metaL.py test_metaL.py webook.py \
+                            game.py metacircular.py redmine.py demos.py \
                             doc/tutorial.md \
                             doc/SICP_1_1_1_Expressions.md \
                             doc/ORM.md

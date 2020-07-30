@@ -282,7 +282,8 @@ of building the distributed knowledge database using incremental computation of
 data elements.
 
 * **The Unison language** https://www.unisonweb.org
-  * https://www.youtube.com/watch?v=yicXcdLI2YA
+  * Paul Chiusano [Unison: a new distributed programming language](https://www.youtube.com/watch?v=gCWtkvDQ2ZI) Strange Loop '19
+  * [Unison: An Introduction and Q&A with Rúnar Bjarnason](https://www.youtube.com/watch?v=yicXcdLI2YA)
 
 ### Smalltalk language and pure OOP
 

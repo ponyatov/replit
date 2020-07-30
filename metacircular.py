@@ -11,7 +11,8 @@ from metaL import *
 vm = VM(MODULE)
 vm << vm
 
-## @name metainfo
+## @defgroup minfo metacircular
+## @ingroup info
 ## @brief constants reimported from the `metaL` module
 ## @{
 
@@ -37,13 +38,11 @@ code into many dependent files. It's metaprogramming in a wide.
 ''')
 vm['ABOUT'] = ABOUT
 
-AUTHOR = Author(AUTHOR)
-vm['AUTHOR'] = AUTHOR
-
 EMAIL = Email(EMAIL)
 vm['EMAIL'] = EMAIL
 
-AUTHOR << EMAIL
+AUTHOR = Author(AUTHOR) << EMAIL
+vm['AUTHOR'] = AUTHOR
 
 YEAR = YEAR
 vm['YEAR'] = YEAR
