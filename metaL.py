@@ -457,6 +457,17 @@ class File(IO):
             self.fh.flush()
         return self
 
+## @defgroup gen codegen
+## @brief automated code generators
+
+## @defgroup make makefile
+## @ingroup gen
+
+## @ingroup make
+class Makefile(File):
+    def __init__(self, V='Makefile'):
+        File.__init__(self, V)
+
 ## @defgroup doc Documenting
 
 ## @ingroup doc

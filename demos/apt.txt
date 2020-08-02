@@ -1,0 +1,1 @@
+git make binutils tcc qemu-system-i386

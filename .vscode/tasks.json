@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "webook",
+            "label": "demos/build",
             "type": "shell",
-            "command": "make web",
+            "command": "make -C demos",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

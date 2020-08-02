@@ -43,6 +43,12 @@ demos:
 	$(PY) -i $@.py
 	$(MAKE) $@
 
+.PHONY: dja
+dja:
+	$(MAKE) doxy test
+	$(PY) -i $@.py
+	$(MAKE) $@
+
 tmp/%.o: src/%.c
 	tcc/bin/tcc -c -o $@ $<
 tmp/%: src/%.c
@@ -139,7 +145,7 @@ MERGE  = Makefile README.md .vscode apt.txt requirements.txt
 MERGE += $(MODULE).py $(MODULE).ini test_$(MODULE).py
 MERGE += webook.py static templates doxy.gen doc
 MERGE += game.py metacircular.py redmine.py
-MERGE += demos.py demos
+MERGE += demos.py demos dja.py dja
 
 master:
 	git checkout $@

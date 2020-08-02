@@ -51,4 +51,86 @@ README // ('')
 README // ('github: %s/%s' %
            (GITHUB.val, 'replit/blob/master/%s.py' % MODULE.val))
 
+mk = File('Makefile')
+filedir // mk
+
+mk // ('''
+CWD    = $(CURDIR)
+MODULE = %s
+OS     = $(shell uname -s)''' % MODULE.val)
+mk // ('''
+NOW = $(shell date +%d%m%y)
+REL = $(shell git rev-parse --short=4 HEAD)''')
+mk // ('''
+CC      = %s
+AS      = %s
+LD      = %s
+OBJDUMP = objdump''' % tuple(['tcc -m32'] * 3))
+mk // ('''
+.PHONY: all''')
+mk // ('''
+all: $(MODULE).kernel
+\tqemu-system-i386 -kernel $<''')
+mk // ('''
+OBJ += multiboot.o kernel.o''')
+mk // ('''
+$(MODULE).kernel: $(OBJ)
+\t$(LD) -o $@ $^''')
+build_short = '%%.o: %%.%s Makefile\n\t$(AS) -c -m32 -o $@ $< && $(OBJDUMP) -xdas $@ > $@.dump'
+mk // (build_short % 's')
+mk // (build_short % 'c')
+mk // ('''
+.PHONY: zip
+zip:
+\tgit archive --format zip --output $(MODULE)_src_$(NOW)_$(REL).zip HEAD''')
+
+apt = File('apt.txt')
+filedir // apt
+apt // ('git make binutils tcc qemu-system-i386')
+
+gitignore = File('.gitignore')
+filedir // gitignore
+gitignore // ('*~\n*.swp\n\n*.o\n*.dump\n%s.kernel\n\n%s_src_*.zip' %
+              (MODULE.val, MODULE.val))
+
+# https://www.gnu.org/software/grub/manual/multiboot/multiboot.html
+# https://wiki.osdev.org/Multiboot
+
+multibooh = File('multiboot.h')
+filedir // multibooh
+multibooh // '// http://git.savannah.gnu.org/cgit/grub.git/tree/doc/multiboot.h?h=multiboot'
+
+multiboot = File('multiboot.s')
+filedir // multiboot
+multiboot // ('''
+#include "multiboot.h"
+
+     .section  .multiboot''')
+multiboot // ('''
+    multiboot:
+     required:
+        magic: .long 0x1BADB002  // multiboot v.1
+        flags: .long (1<<0|1<<2) // align 4K | videoinit
+     checksum: .long 0x1BADB002  //
+       memory:
+  header_addr: .long 0
+    load_addr: .long 0
+load_end_addr: .long 0
+ bss_end_addr: .long 0
+   entry_addr: .long 0
+ askvideomode:
+    mode_type: .long 0           // ask linear buffer
+        width: .long 640
+       height: .long 480
+        depth: .long 24
+''')
+
+# https://wiki.osdev.org/TCC
+
+kernel = File('kernel.c')
+filedir // kernel
+kernel // ('''
+
+''')
+
 ## @}

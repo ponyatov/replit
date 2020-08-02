@@ -1,0 +1,8 @@
+*~
+*.swp
+
+*.o
+*.dump
+demos.kernel
+
+demos_src_*.zip
