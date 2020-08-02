@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gid',['gid',['../group__persist.html#gae3fe73faf777dfa60bb38c1eb2cd78b8',1,'metaL::Object']]],
-  ['github',['GITHUB',['../group__info.html#ga69eb0ed0890fc7cffabfaf8ad4d9f030',1,'metaL.GITHUB()'],['../group__minfo.html#gabd257346e32e1b8063f97667d102d9ee',1,'metacircular.GITHUB()']]]
+  ['fh',['fh',['../classmetaL_1_1File.html#a0f67e3c77f402e72518007aa1d553e1c',1,'metaL::File']]],
+  ['filedir',['filedir',['../group__demos.html#ga9f86fe7bb2987df798f5f75dd57fcd40',1,'demos.filedir()'],['../group__dj.html#ga1c4d73dd536b0557888ad5f717e9c722',1,'dja.filedir()']]]
 ];

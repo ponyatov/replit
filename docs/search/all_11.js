@@ -1,14 +1,8 @@
 var searchData=
 [
-  ['system_20init',['system init',['../group__init.html',1,'']]],
-  ['sicp_201_2e1_2e1_20expressions',['SICP 1.1.1 Expressions',['../md_doc_SICP_1_1_1_Expressions.html',1,'']]],
-  ['section',['Section',['../classmetaL_1_1Section.html',1,'metaL']]],
-  ['sicp_5f1_5f1_5f1_5fexpressions_2emd',['SICP_1_1_1_Expressions.md',['../SICP__1__1__1__Expressions_8md.html',1,'']]],
-  ['size',['Size',['../classmetaL_1_1Size.html',1,'metaL']]],
-  ['slot',['slot',['../classmetaL_1_1Object.html#a8ec1ff04d05d52ef03fbb84d15d54f0d',1,'metaL::Object']]],
-  ['stack',['Stack',['../classmetaL_1_1Stack.html',1,'metaL']]],
-  ['string',['String',['../classmetaL_1_1String.html',1,'metaL']]],
-  ['sub',['sub',['../classmetaL_1_1Number.html#ae569af68d6803694f2d0a174d1577059',1,'metaL::Number']]],
-  ['symbol',['Symbol',['../classmetaL_1_1Symbol.html',1,'metaL']]],
-  ['sync',['sync',['../group__persist.html#ga436db7cb43830723e880b2ac862b3a99',1,'metaL.Object.sync()'],['../classmetaL_1_1VarChar.html#a92e2d87eed24917d78e1f58c7ad5c8e3',1,'metaL.VarChar.sync()']]]
+  ['readme',['README',['../group__demos.html#gaa2a03124bd50c8bf0b34c39ce5967f32',1,'demos']]],
+  ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
+  ['redmine',['Redmine',['../classredmine_1_1Redmine.html',1,'redmine.Redmine'],['../namespaceredmine.html',1,'redmine'],['../group__redmine.html#gacd86031742f87dedf2b741d91bf45d14',1,'redmine.redmine()'],['../group__redmine.html',1,'(Global Namespace)']]],
+  ['redmine_2epy',['redmine.py',['../redmine_8py.html',1,'']]],
+  ['repl',['REPL',['../group__repl.html#gaa68c3f209a9f835f178bd690f7636edc',1,'metaL.REPL()'],['../group__repl.html',1,'(Global Namespace)']]]
 ];

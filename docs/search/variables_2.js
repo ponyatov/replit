@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['email',['EMAIL',['../group__info.html#ga6db88e5bd18b5e2f37f1d34a80761116',1,'metaL.EMAIL()'],['../group__minfo.html#ga9e6ed91ba2a3d02effc464f02468e87c',1,'metacircular.EMAIL()']]]
+  ['display',['display',['../classgame_1_1Display.html#a685973807af3931e0befb973812d730c',1,'game::Display']]],
+  ['doc',['doc',['../namespacewebook.html#aec70682d6ab1762934dae2911e77988c',1,'webook.doc()'],['../group__circ.html#ga62df7e731e65d8bdc46a5ab0bc5d4fc2',1,'metacircular.doc()']]]
 ];
